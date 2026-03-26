@@ -305,9 +305,26 @@ function BuildYourOwn() {
                     </span>
                   </div>
                 </div>
-                <div className="h-3 bg-gray-100 rounded-sm overflow-hidden">
-                  <div className={`h-full rounded-sm transition-all duration-100 ${r.bal >= 0 ? "bg-green-400" : r.bal > -10 ? "bg-amber-400" : "bg-red-500"}`}
-                    style={{ width: `${Math.min(Math.abs(r.bal)/42*100,100)}%` }} />
+                <div className="relative h-3 bg-gray-100 rounded-sm overflow-hidden mt-0.5">
+                  {/* Zero centre line */}
+                  <div className="absolute left-1/2 top-0 h-full w-px bg-gray-400 z-10" />
+                  {/* Bar — extends left if negative, right if positive */}
+                  {r.bal >= 0 ? (
+                    <div
+                      className="absolute top-0 h-full bg-green-400 rounded-r-sm transition-all duration-300"
+                      style={{ left: '50%', width: `${Math.min(r.bal / 45 * 50, 50)}%` }}
+                    />
+                  ) : (
+                    <div
+                      className={`absolute top-0 h-full rounded-l-sm transition-all duration-300 ${r.bal > -10 ? "bg-amber-400" : "bg-red-500"}`}
+                      style={{ right: '50%', width: `${Math.min(Math.abs(r.bal) / 45 * 50, 50)}%` }}
+                    />
+                  )}
+                </div>
+                <div className="flex justify-between text-xs text-gray-300 mt-0.5">
+                  <span>–45%</span>
+                  <span>0</span>
+                  <span>+</span>
                 </div>
               </div>
             ))}
