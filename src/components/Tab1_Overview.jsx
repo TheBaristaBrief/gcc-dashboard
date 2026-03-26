@@ -98,18 +98,20 @@ const riskColors = {
 function SWFCard({ country }) {
   const swf = country.swf;
   const isIlliquid = swf.illiquid;
-  const isLocked = country.id === "kwt";
+  const isKuwait = country.id === "kwt";
+  const displayBn = isKuwait ? swf.fgfBn : swf.totalBn;
   return (
     <div className="bg-gray-50 rounded-lg p-3">
       <p className="text-xs text-gray-500 mb-1">{country.name}</p>
+      <p className="text-xs text-gray-400 mb-0.5">{isKuwait ? "Future Generations Fund (FGF)" : "SWF"}</p>
       <p className="text-xl font-semibold text-gray-800">
-        {swf.totalBn > 0 ? `$${swf.totalBn >= 1000 ? (swf.totalBn/1000).toFixed(1)+"T" : swf.totalBn+"bn"}` : "None"}
+        {displayBn > 0 ? `$${displayBn >= 1000 ? (displayBn/1000).toFixed(1)+"T" : displayBn+"bn"}` : "None"}
       </p>
       <p className={`text-xs mt-1 ${swf.usableBn < 5 ? "text-red-600 font-medium" : "text-gray-400"}`}>
         ${swf.usableBn >= 1 ? swf.usableBn.toFixed(0) : swf.usableBn.toFixed(1)}bn usable
       </p>
       {isIlliquid && <p className="text-xs text-orange-600 mt-0.5">Mostly illiquid</p>}
-      {isLocked && <p className="text-xs text-blue-600 mt-0.5">Future Generations Fund (FGF) †</p>}
+      {isKuwait && <p className="text-xs text-blue-600 mt-0.5 italic">† Requires special approval to access</p>}
     </div>
   );
 }
