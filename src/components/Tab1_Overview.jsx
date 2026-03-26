@@ -215,8 +215,11 @@ export default function Tab1_Overview() {
                       {c.hormuz.exposurePct}%
                     </span>
                   </td>
-                  <td className={`py-2 text-center font-semibold ${c.swf.usableBn < 5 ? "text-red-600" : c.swf.usableBn < 50 ? "text-amber-600" : "text-green-700"}`}>
-                    {c.swf.usableBn > 0 ? `$${c.swf.usableBn >= 100 ? Math.round(c.swf.usableBn)+"bn" : c.swf.usableBn.toFixed(1)+"bn"}` : "None"}
+                  <td className={`py-2 text-center font-semibold ${c.id === "kwt" ? "text-blue-600" : c.swf.usableBn < 5 ? "text-red-600" : c.swf.usableBn < 50 ? "text-amber-600" : "text-green-700"}`}>
+                    {c.id === "kwt"
+                      ? `$${c.swf.fgfBn >= 1000 ? (c.swf.fgfBn/1000).toFixed(1)+"T" : Math.round(c.swf.fgfBn)+"bn"}`
+                      : c.swf.usableBn > 0 ? `$${c.swf.usableBn >= 100 ? Math.round(c.swf.usableBn)+"bn" : c.swf.usableBn.toFixed(1)+"bn"}` : "None"}
+                    {c.id === "kwt" && <span className="text-blue-400 ml-0.5">†</span>}
                     {c.swf.illiquid && <span className="text-orange-500 ml-0.5">*</span>}
                   </td>
                   <td className="py-2 text-center">
@@ -228,7 +231,7 @@ export default function Tab1_Overview() {
               ))}
             </tbody>
           </table>
-          <p className="text-xs text-gray-400 mt-2">* Mostly illiquid — see SWF notes</p>
+          <p className="text-xs text-gray-400 mt-2">* Mostly illiquid — see SWF notes &nbsp;·&nbsp; † Kuwait FGF requires special approval to access (parliamentary law or emergency Emir decree)</p>
         </div>
       </div>
 
