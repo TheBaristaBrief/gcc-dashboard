@@ -109,7 +109,7 @@ function SWFCard({ country }) {
         ${swf.usableBn >= 1 ? swf.usableBn.toFixed(0) : swf.usableBn.toFixed(1)}bn usable
       </p>
       {isIlliquid && <p className="text-xs text-orange-600 mt-0.5">Mostly illiquid</p>}
-      {isLocked && <p className="text-xs text-blue-600 mt-0.5">FGF unlocked (parl. dissolved)</p>}
+      {isLocked && <p className="text-xs text-blue-600 mt-0.5">Future Generations Fund (FGF) †</p>}
     </div>
   );
 }
@@ -247,11 +247,14 @@ export default function Tab1_Overview() {
             </p>
           </div>
           <div className="bg-blue-50 rounded-lg p-3">
-            <p className="text-xs font-medium text-blue-700 mb-1">Kuwait — FGF unlocked by parliament dissolution</p>
+            <p className="text-xs font-medium text-blue-700 mb-1">Kuwait — Future Generations Fund (FGF)</p>
             <p className="text-xs text-blue-600 leading-relaxed">
-              GRF (operating fund) ~$6.5bn, nearly depleted. FGF ($913bn) previously required
-              parliamentary law — parliament dissolved early 2026, removing legal barrier.
+              Kuwait's SWF is the Future Generations Fund (FGF) ~$913bn — a liquid, globally diversified portfolio.
+              GRF (operating buffer) ~$6.5bn, nearly depleted.
               ~$184bn practically mobilisable.
+            </p>
+            <p className="text-xs text-blue-500 mt-1.5 italic">
+              † Accessing the FGF requires special approval — withdrawal requires a parliamentary law or emergency decree by the Emir (constitutionally unprecedented).
             </p>
           </div>
         </div>

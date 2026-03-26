@@ -195,10 +195,15 @@ function FundingBlock({ country }) {
               <span className="text-gray-400">$0</span>
               <span className={maxSwf<5?"text-red-500 font-medium":"text-gray-400"}>
                 Max {fmtUsd(maxSwf)}
-                {country.id==="kwt" && " — GRF + FGF (parl. dissolved)"}
+                {country.id==="kwt" && " — Future Generations Fund (FGF) †"}
                 {country.id==="bhr" && " — Mumtalakat liquid only"}
               </span>
             </div>
+            {country.id==="kwt" && (
+              <p className="text-xs text-blue-500 italic mt-1">
+                † Accessing the FGF requires special approval — withdrawal requires a parliamentary law or emergency decree by the Emir.
+              </p>
+            )}
           </div>
 
           {/* Coverage bar */}
