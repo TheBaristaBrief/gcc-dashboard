@@ -2,14 +2,12 @@ import { useState } from "react";
 import Tab1_Overview from "./Tab1_Overview";
 import Tab2_Scenarios from "./Tab2_Scenarios";
 import Tab3_Countries from "./Tab3_Countries";
-import Tab4_Forecast from "./Tab4_Forecast";
 import data from "../data/gcc-model.json";
 
 const TABS = [
   { id: "overview",  label: "Fiscal overview",   component: Tab1_Overview },
   { id: "scenarios", label: "War scenarios",      component: Tab2_Scenarios },
   { id: "countries", label: "Country deep dives", component: Tab3_Countries },
-  { id: "forecast",  label: "2-year forecast",    component: Tab4_Forecast },
 ];
 
 export default function Dashboard() {
