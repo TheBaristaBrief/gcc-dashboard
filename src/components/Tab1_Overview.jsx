@@ -9,17 +9,27 @@ function KpiCard({ country }) {
   const colorClass = isPos ? "text-green-700" : Math.abs(bal) < 1.5 ? "text-gray-500" : bal > -8 ? "text-amber-700" : "text-red-700";
   const subLabel = isPos ? "Surplus" : Math.abs(bal) < 1.5 ? "Near balance" : bal > -8 ? "Moderate deficit" : "Structural deficit";
   const isBeneficiary = country.baseline.riskRating === "Beneficiary";
+  const isUAE = country.id === "uae";
   return (
     <div className="bg-gray-50 rounded-lg p-3">
-      <p className="text-xs text-gray-500 mb-1.5">
-        {country.name}
-        {country.id === "uae" && <span className="text-gray-400"> *</span>}
-      </p>
+      <p className="text-xs text-gray-500 mb-1.5">{country.name}</p>
       <p className={`text-2xl font-semibold leading-none mb-1 tabular-nums ${colorClass}`}>
         {isPos ? "+" : ""}{bal.toFixed(1)}%
       </p>
       <p className="text-xs text-gray-400">{subLabel}</p>
       {isBeneficiary && <p className="text-xs text-blue-500 mt-1">War beneficiary</p>}
+      {isUAE && (
+        <div className="mt-2 pt-2 border-t border-gray-200 space-y-0.5">
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Abu Dhabi</span>
+            <span className="text-green-600 font-medium">~+9%</span>
+          </div>
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Dubai</span>
+            <span className="text-amber-600 font-medium">~+2.5%</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -131,7 +141,7 @@ export default function Tab1_Overview() {
           {COUNTRIES.map((c) => <KpiCard key={c.id} country={c} />)}
         </div>
         <p className="text-xs text-gray-400 mt-2">
-          * UAE consolidated. Abu Dhabi ~+8–10% surplus (ADNOC). Dubai ~+2–3% pre-war but severely impacted during war (Jebel Ali, tourism, trade finance).
+          UAE shown consolidated · Abu Dhabi &amp; Dubai breakdown in card above · war-time divergence detailed in Country deep dives
         </p>
       </div>
 
