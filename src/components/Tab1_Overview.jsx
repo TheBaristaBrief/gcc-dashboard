@@ -122,6 +122,7 @@ function SWFCard({ country }) {
   const swf = country.swf;
   const isIlliquid = swf.illiquid;
   const isKuwait = country.id === "kwt";
+  const isUAE = country.id === "uae";
   const displayBn = isKuwait ? swf.fgfBn : swf.totalBn;
   return (
     <div className="bg-gray-50 rounded-lg p-3">
@@ -130,9 +131,13 @@ function SWFCard({ country }) {
       <p className="text-xl font-semibold text-gray-800">
         {displayBn > 0 ? `$${displayBn >= 1000 ? (displayBn/1000).toFixed(1)+"T" : displayBn+"bn"}` : "None"}
       </p>
-      <p className={`text-xs mt-1 ${swf.usableBn < 5 ? "text-red-600 font-medium" : "text-gray-400"}`}>
-        ${swf.usableBn >= 1 ? swf.usableBn.toFixed(0) : swf.usableBn.toFixed(1)}bn usable
-      </p>
+      {isUAE ? (
+        <p className="text-xs text-gray-400 mt-1 italic">Some may not be immediately accessible</p>
+      ) : (
+        <p className={`text-xs mt-1 ${swf.usableBn < 5 ? "text-red-600 font-medium" : "text-gray-400"}`}>
+          ${swf.usableBn >= 1 ? swf.usableBn.toFixed(0) : swf.usableBn.toFixed(1)}bn usable
+        </p>
+      )}
       {isIlliquid && <p className="text-xs text-orange-600 mt-0.5">Mostly illiquid</p>}
       {isKuwait && <p className="text-xs text-blue-600 mt-0.5 italic">† Requires special approval to access</p>}
     </div>

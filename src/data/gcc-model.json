@@ -456,9 +456,10 @@
       },
       "swf": {
         "totalBn": 1300,
-        "usableShare": 0.4,
-        "usableBn": 520,
-        "note": "ADIA + Mubadala \u2014 partially ringfenced. Largest SWF buffer in GCC."
+        "usableShare": 1.0,
+        "usableBn": 1300,
+        "accessNote": "ADIA + Mubadala. Some assets may not be immediately accessible (long-term mandates, illiquid positions).",
+        "note": "ADIA + Mubadala \u2014 largest SWF buffer in GCC. Accessibility varies by asset class."
       },
       "borrowing": {
         "preWarSpreadBps": 50,
