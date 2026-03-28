@@ -26,7 +26,7 @@ function KpiCard({ country }) {
           </div>
           <div className="flex justify-between text-xs">
             <span className="text-gray-400">Dubai</span>
-            <span className="text-amber-600 font-medium">~+2.5%</span>
+            <span className="text-gray-500 font-medium">~+2.5%</span>
           </div>
         </div>
       )}
@@ -86,6 +86,7 @@ function BreakevenCard({ country }) {
   const current = 65;
   const gap = be - current;
   const isGood = gap <= 0;
+  const isUAE = country.id === "uae";
   return (
     <div className="bg-gray-50 rounded-lg p-3">
       <p className="text-xs text-gray-500 mb-1">{country.name}</p>
@@ -93,6 +94,18 @@ function BreakevenCard({ country }) {
         ${be}
       </p>
       <p className="text-xs text-gray-400">{isGood ? `$${Math.abs(gap)} cushion` : `$${gap} above $65 base`}</p>
+      {isUAE && (
+        <div className="mt-2 pt-2 border-t border-gray-200 space-y-0.5">
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Abu Dhabi</span>
+            <span className="text-green-600 font-medium">~$47</span>
+          </div>
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Dubai</span>
+            <span className="text-gray-500 font-medium">Non-oil</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
