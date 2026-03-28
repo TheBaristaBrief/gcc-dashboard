@@ -102,6 +102,8 @@ function ScenarioCard({ scenario, isSelected, onClick }) {
       <div className="space-y-2">
         {COUNTRIES.map((c) => {
           const s = c.scenarios[scenario.id];
+          const isUAE = c.id === "uae";
+          const uaeSplit = { A: { ad:10, db:-3 }, B: { ad:8, db:-8 }, C: { ad:6, db:-15 } };
           return (
             <div key={c.id}>
               <div className="flex justify-between text-xs mb-0.5">
@@ -111,6 +113,20 @@ function ScenarioCard({ scenario, isSelected, onClick }) {
                 </span>
               </div>
               <ScenarioBar value={s.fiscalBalancePct} baseline={c.baseline.fiscalBalancePct} />
+              {isUAE && (
+                <div className="ml-2 mt-1 pl-2 border-l-2 border-gray-200 space-y-0.5">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-400">↳ Abu Dhabi</span>
+                    <span className="text-green-600 font-medium">~+{uaeSplit[scenario.id].ad}%</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-400">↳ Dubai</span>
+                    <span className={`font-medium ${uaeSplit[scenario.id].db >= 0 ? "text-green-600" : uaeSplit[scenario.id].db > -8 ? "text-amber-600" : "text-red-600"}`}>
+                      ~{uaeSplit[scenario.id].db}%
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           );
         })}
@@ -333,7 +349,11 @@ function BuildYourOwn() {
           </div>
 
           <div className="space-y-3">
-            {results.map((r) => (
+            {results.map((r) => {
+              const isUAE = r.name === "UAE";
+              const adBal = r.bal + 4.5;
+              const dbBal = r.bal - 11.5;
+              return (
               <div key={r.name}>
                 <div className="flex justify-between items-center mb-0.5">
                   <span className="text-xs font-medium text-gray-600">{r.name}</span>
@@ -367,8 +387,20 @@ function BuildYourOwn() {
                   <span>0</span>
                   <span>+</span>
                 </div>
+                {isUAE && (
+                  <div className="ml-2 mt-1 pl-2 border-l-2 border-gray-200 space-y-0.5">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-400">↳ Abu Dhabi (est.)</span>
+                      <span className={`font-medium ${adBal >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtPct(adBal)}</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-400">↳ Dubai (est.)</span>
+                      <span className={`font-medium ${dbBal >= 0 ? "text-green-600" : dbBal > -8 ? "text-amber-600" : "text-red-600"}`}>{fmtPct(dbBal)}</span>
+                    </div>
+                  </div>
+                )}
               </div>
-            ))}
+              );})}
             <div className="flex justify-between text-xs text-gray-400 pt-1">
               <span></span>
               <div className="flex gap-3">
