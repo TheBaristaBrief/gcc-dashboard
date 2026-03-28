@@ -169,15 +169,24 @@ function AssumptionsTable({ scenarioId }) {
   );
 }
 
-// ── Build your own — global sliders ──────────────────────────────────────
+// ── Build your own — global + per-country sliders ─────────────────────────
 function BuildYourOwn() {
+  const [mode, setMode]             = useState("global"); // "global" | "country"
   const [warWeeks, setWarWeeks]     = useState(7);
   const [hormuzPct, setHormuzPct]   = useState(100);
   const [oilWar, setOilWar]         = useState(125);
   const [oilPost, setOilPost]       = useState(70);
+  // Global spending/revenue
   const [milPct, setMilPct]         = useState(2);
   const [subPct, setSubPct]         = useState(1);
   const [nolPct, setNolPct]         = useState(3);
+  // Per-country [kwt, qat, bhr, sau, uae, omn]
+  const [milPcts, setMilPcts]       = useState([2, 2, 2, 4, 3, 1]);
+  const [subPcts, setSubPcts]       = useState([1, 1, 3, 2, 1, 1]);
+  const [nolPcts, setNolPcts]       = useState([2, 5, 6, 2, 4, 2]);
+  const [oilShocks, setOilShocks]   = useState([0, 0, 0, 0, 0, 0]);
+  const updateArr = (arr, setArr, idx, val) => { const n=[...arr]; n[idx]=val; setArr(n); };
+  const DEFAULTS  = { mil:[2,2,2,4,3,1], sub:[1,1,3,2,1,1], nol:[2,5,6,2,4,2] };
 
   const warMos = warWeeks / 4.33;
 
@@ -202,15 +211,19 @@ function BuildYourOwn() {
     const cl = hormuzPct / 100;
 
     return COUNTRIES.map((c, i) => {
+      const mil = mode === "country" ? milPcts[i] : milPct;
+      const sub = mode === "country" ? subPcts[i] : subPct;
+      const nol = mode === "country" ? nolPcts[i] : nolPct;
+      const extraOil = mode === "country" ? oilShocks[i] / 100 : 0;
       const byp_f = Math.min(1, Math.max(0, (bypass_v[i]+0.1*fullprod[i])/fullprod[i]));
       let oil_chg;
       if (i >= 3) {
-        oil_chg = (2*(1+0.07) + warMos*(1+byp_f-1+((oilWar-65)/65)*byp_f*cl) + Math.max(0,10-warMos)*(1+0.08)*oilPost/65)/12 - 1;
+        oil_chg = (2*(1+0.07) + warMos*(1+byp_f-1+((oilWar-65)/65)*byp_f*cl) + Math.max(0,10-warMos)*(1+0.08)*oilPost/65)/12 - 1 + extraOil;
       } else {
-        oil_chg = (2*(1+0.05) + warMos*(1-cl) + Math.max(0,10-warMos)*(1+((oilPost-65)/65)))/12 - 1;
+        oil_chg = (2*(1+0.05) + warMos*(1-cl) + Math.max(0,10-warMos)*(1+((oilPost-65)/65)))/12 - 1 + extraOil;
       }
-      const nol_chg = -(nolPct/100) * warMos/12;
-      const spend_chg = imf_sp[i] + (milPct+subPct)/100 * warMos/12;
+      const nol_chg = -(nol/100) * warMos/12;
+      const spend_chg = imf_sp[i] + (mil+sub)/100 * warMos/12;
       const rev26 = oil_25[i]*(1+oil_chg) + nol_25[i]*(1+nol_chg);
       const exp26 = exp_25[i]*(1+spend_chg);
       const gdp_chg = oil_sh[i]*oil_chg + mfg_sh[i]*(mfg_shk[i]*warMos/12) + oth_sh[i]*(oth_shk[i]*warMos/12);
@@ -218,7 +231,7 @@ function BuildYourOwn() {
       const bal = (rev26-exp26)/gdp26*100;
       return { name:c.name, bal, delta:bal-base_pct[i] };
     });
-  }, [warWeeks, hormuzPct, oilWar, oilPost, milPct, subPct, nolPct, warMos]);
+  }, [warWeeks, hormuzPct, oilWar, oilPost, milPct, subPct, nolPct, milPcts, subPcts, nolPcts, oilShocks, mode, warMos]);
 
   const reopensDate = new Date(2026, 2, 25);
   reopensDate.setDate(reopensDate.getDate() + (warWeeks-3)*7);
@@ -232,19 +245,42 @@ function BuildYourOwn() {
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))} className="w-full" />
-      <p className="text-xs text-gray-400 mt-0.5">{hint}</p>
+      {hint && <p className="text-xs text-gray-400 mt-0.5">{hint}</p>}
+    </div>
+  );
+
+  const MiniSlider = ({ label, value, min, max, step, onChange, display, color="text-gray-800" }) => (
+    <div className="mb-2.5">
+      <div className="flex justify-between items-center mb-0.5">
+        <label className="text-xs text-gray-500">{label}</label>
+        <span className={`text-xs font-semibold tabular-nums ${color}`}>{display}</span>
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value}
+        onChange={(e) => onChange(Number(e.target.value))} className="w-full" style={{height:"4px"}} />
     </div>
   );
 
   return (
     <div className="border border-gray-200 rounded-xl p-5">
-      <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">
-        Build your own scenario — global (all 6 countries update simultaneously)
-      </p>
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-xs font-medium uppercase tracking-widest text-gray-400">Build your own scenario</p>
+        <div className="flex rounded-lg border border-gray-200 overflow-hidden text-xs font-medium">
+          <button onClick={() => setMode("global")}
+            className={`px-3 py-1.5 transition-colors ${mode==="global" ? "bg-gray-800 text-white" : "text-gray-500 hover:bg-gray-50"}`}>
+            Global
+          </button>
+          <button onClick={() => setMode("country")}
+            className={`px-3 py-1.5 transition-colors ${mode==="country" ? "bg-gray-800 text-white" : "text-gray-500 hover:bg-gray-50"}`}>
+            Per Country
+          </button>
+        </div>
+      </div>
       <div className="grid grid-cols-2 gap-6">
         {/* LHS — variables */}
         <div>
-          <p className="text-xs font-medium text-gray-500 mb-3 uppercase tracking-wide">Variables</p>
+          <p className="text-xs font-medium text-gray-500 mb-3 uppercase tracking-wide">
+            {mode === "global" ? "Variables — all countries" : "Global variables"}
+          </p>
 
           <Slider label="War / closure duration" value={warWeeks} min={1} max={16} step={1}
             onChange={setWarWeeks} display={`${warWeeks} weeks · reopens ~${reopensStr}`}
@@ -262,17 +298,22 @@ function BuildYourOwn() {
             onChange={setOilPost} display={`$${oilPost}/bbl`}
             hint={`BofA mid-cycle $70 · Annual avg: $${oilAvg.toFixed(1)}/bbl`} />
 
-          <Slider label="Military spending increase (%/mo)" value={milPct} min={0} max={8} step={0.5}
-            onChange={setMilPct} display={`+${milPct}%/mo`}
-            hint="Saudi=4%, UAE=2%, Kuwait=2%, others=1%. Applied globally here." />
-
-          <Slider label="Subsidies & support (%/mo)" value={subPct} min={0} max={4} step={0.5}
-            onChange={setSubPct} display={`+${subPct}%/mo`}
-            hint="Bahrain risk: 3–4% social stability. Saudi: 2%. Others: 1%." />
-
-          <Slider label="Non-hydrocarbon revenue hit (%/yr)" value={nolPct} min={0} max={15} step={0.5}
-            onChange={setNolPct} display={`–${nolPct}%/yr`}
-            hint="Qatar –5%, Bahrain –6%, UAE –4%. Applied globally here." />
+          {mode === "global" && (<>
+            <Slider label="Military spending increase (%/mo)" value={milPct} min={0} max={8} step={0.5}
+              onChange={setMilPct} display={`+${milPct}%/mo`}
+              hint="Saudi=4%, UAE=3%, Kuwait=2%, others=1%" />
+            <Slider label="Subsidies & support (%/mo)" value={subPct} min={0} max={4} step={0.5}
+              onChange={setSubPct} display={`+${subPct}%/mo`}
+              hint="Bahrain: 3–4%, Saudi: 2%, others: 1%" />
+            <Slider label="Non-hydrocarbon revenue hit (%/yr)" value={nolPct} min={0} max={15} step={0.5}
+              onChange={setNolPct} display={`–${nolPct}%/yr`}
+              hint="Qatar –5%, Bahrain –6%, UAE –4%" />
+          </>)}
+          {mode === "country" && (
+            <p className="text-xs text-gray-400 mt-2 italic">
+              Set military, subsidies, non-hydro revenue & hydrocarbon shock per country below ↓
+            </p>
+          )}
         </div>
 
         {/* RHS — outputs */}
@@ -337,12 +378,43 @@ function BuildYourOwn() {
             </div>
           </div>
 
-          <p className="text-xs text-gray-400 mt-4 leading-relaxed border-t border-gray-100 pt-3">
-            Global sliders apply the same % to all countries. For per-country control,
-            use the Country Deep Dives tab.
-          </p>
         </div>
       </div>
+
+      {/* Per-country cards — only in country mode */}
+      {mode === "country" && (
+        <div className="mt-6 border-t border-gray-100 pt-5">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+              Per-country — spending & revenue variables
+            </p>
+            <button onClick={() => { setMilPcts([...DEFAULTS.mil]); setSubPcts([...DEFAULTS.sub]); setNolPcts([...DEFAULTS.nol]); setOilShocks([0,0,0,0,0,0]); }}
+              className="text-xs text-gray-400 hover:text-gray-600 underline">
+              Reset to defaults
+            </button>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {COUNTRIES.map((c, i) => (
+              <div key={c.id} className="bg-gray-50 rounded-lg p-3">
+                <p className="text-xs font-semibold text-gray-700 mb-3">{c.name}</p>
+                <MiniSlider label="🪖 Military (%/mo)" value={milPcts[i]} min={0} max={8} step={0.5}
+                  onChange={(v) => updateArr(milPcts, setMilPcts, i, v)}
+                  display={`+${milPcts[i]}%`} color="text-red-600" />
+                <MiniSlider label="💰 Subsidies (%/mo)" value={subPcts[i]} min={0} max={5} step={0.5}
+                  onChange={(v) => updateArr(subPcts, setSubPcts, i, v)}
+                  display={`+${subPcts[i]}%`} color="text-amber-600" />
+                <MiniSlider label="📉 Non-hydro rev. (%/yr)" value={nolPcts[i]} min={0} max={20} step={0.5}
+                  onChange={(v) => updateArr(nolPcts, setNolPcts, i, v)}
+                  display={`–${nolPcts[i]}%`} color="text-orange-600" />
+                <MiniSlider label="🛢 Hydro rev. shock (%)" value={oilShocks[i]} min={-30} max={30} step={1}
+                  onChange={(v) => updateArr(oilShocks, setOilShocks, i, v)}
+                  display={`${oilShocks[i]>=0?"+":""}${oilShocks[i]}%`}
+                  color={oilShocks[i] >= 0 ? "text-green-600" : "text-red-600"} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

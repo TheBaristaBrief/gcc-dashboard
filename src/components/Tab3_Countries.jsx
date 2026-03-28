@@ -440,14 +440,41 @@ function CountryDetail({ country }) {
         </div>
       )}
 
-      {/* UAE divergence note */}
+      {/* UAE Abu Dhabi / Dubai split */}
       {isUAE && (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-3">
-          <p className="text-xs font-medium text-amber-700 mb-1">UAE internal divergence</p>
-          <p className="text-xs text-amber-600 leading-relaxed">
-            Consolidated +4.5% masks sharp divergence. Abu Dhabi: ADNOC Fujairah bypass → surplus widens.
-            Dubai: Jebel Ali port (9% of UAE GDP) severely impacted, tourism collapses, real estate confidence drops.
-            Dubai standalone fiscal position deteriorates sharply — consolidated figure obscures this stress.
+        <div className="border border-amber-200 rounded-xl p-4 bg-amber-50">
+          <p className="text-xs font-medium text-amber-700 mb-3">
+            ⚠ UAE consolidated figures mask sharp internal divergence
+          </p>
+          <div className="grid grid-cols-2 gap-3">
+            {/* Abu Dhabi */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="text-xs font-semibold text-green-800 mb-1">Abu Dhabi + Federal</p>
+              <p className="text-xs text-green-700 mb-2">ADNOC Fujairah bypass · Oil windfall</p>
+              <div className="space-y-1 text-xs">
+                <div className="flex justify-between"><span className="text-gray-500">Pre-war</span><span className="font-semibold text-green-700">~+9% GDP</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Sc A</span><span className="font-semibold text-green-700">~+10% GDP</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Sc B</span><span className="font-semibold text-green-700">~+8% GDP</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Sc C</span><span className="font-semibold text-green-600">~+6% GDP</span></div>
+              </div>
+              <p className="text-xs text-green-600 mt-2 italic">1.8 m b/d via Fujairah · ADIA $900bn buffer</p>
+            </div>
+            {/* Dubai */}
+            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+              <p className="text-xs font-semibold text-red-800 mb-1">Dubai (standalone est.)</p>
+              <p className="text-xs text-red-700 mb-2">Jebel Ali · Tourism · Trade finance</p>
+              <div className="space-y-1 text-xs">
+                <div className="flex justify-between"><span className="text-gray-500">Pre-war</span><span className="font-semibold text-green-700">~+2.5% GDP</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Sc A</span><span className="font-semibold text-amber-700">~−3% GDP</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Sc B</span><span className="font-semibold text-red-700">~−8% GDP</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Sc C</span><span className="font-semibold text-red-700">~−15% GDP</span></div>
+              </div>
+              <p className="text-xs text-red-600 mt-2 italic">Jebel Ali = 9% UAE GDP · 30M tourists/yr at risk</p>
+            </div>
+          </div>
+          <p className="text-xs text-amber-600 mt-2">
+            Consolidated UAE (+4.5% → +3.4% Sc B) is mathematically correct but obscures Dubai's war-year stress.
+            Source: Dubai DOF 2026 · UAE MoF · ADNOC annual report
           </p>
         </div>
       )}
