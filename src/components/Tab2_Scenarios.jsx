@@ -10,14 +10,16 @@ const fmtPct = (v) => (v >= 0 ? "+" : "") + v.toFixed(1) + "%";
 
 // ── Live situation ────────────────────────────────────────────────────────
 function LiveBlock() {
+  const conflictDay = Math.floor((new Date() - new Date(2026, 1, 28)) / (1000*60*60*24)) + 1;
+  const today = new Date().toISOString().slice(0,10);
   return (
     <div className="mb-8">
       <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-3">
-        Situation as of {data.meta.lastUpdated}
+        Situation as of {today}
       </p>
       <div className="grid grid-cols-4 gap-3 mb-4">
         {[
-          { label: "Conflict day",    value: `Day ${LIVE.conflictDay}`,       sub: "Since 28 Feb 2026",            color: "text-red-600" },
+          { label: "Conflict day",    value: `Day ${conflictDay}`,            sub: "Since 28 Feb 2026",            color: "text-red-600" },
           { label: "Brent crude",     value: `$${LIVE.oilPrice}`,             sub: `+$${LIVE.oilChange24h} 24h`,   color: "text-amber-600" },
           { label: "Hormuz status",   value: "Effectively closed",             sub: "Tanker traffic –90%",          color: "text-red-600" },
           { label: "Qatar LNG",       value: "Force majeure",                  sub: "17% capacity offline 3-5yr",   color: "text-red-600" },
@@ -475,14 +477,14 @@ export default function Tab2_Scenarios() {
         </p>
       </div>
 
+      <BuildYourOwn />
+
       <div className="border border-gray-200 rounded-xl p-5">
         <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">
           Model assumptions
         </p>
         <AssumptionsTable scenarioId={selectedScenario} />
       </div>
-
-      <BuildYourOwn />
     </div>
   );
 }

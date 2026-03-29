@@ -53,7 +53,8 @@ function FundingBlock({ country }) {
   const deficitBn  = sc.fiscalBalancePct / 100 * gdpUsd;
   const isDeficit  = deficitBn < 0;
   const defAbs     = Math.abs(deficitBn);
-  const maxSwf     = country.swf.usableBn;
+  const maxSwf     = country.swf.totalBn;
+  const usableSwf  = country.swf.usableBn;
   const maxDebt    = Math.max(defAbs * 1.5, 1);
 
   const prudentDebt = Math.min((DEBT_CEIL[country.id]/100)*gdpUsd, defAbs);
@@ -90,10 +91,14 @@ function FundingBlock({ country }) {
   const postWarDebt    = country.debtGdpPct + debtGdpPct;
   const swfRemaining   = Math.max(0,maxSwf-swfDraw);
   const swfRemPct      = maxSwf > 0 ? (swfRemaining/maxSwf*100) : 0;
-  const annualInt      = newDebt * (country.borrowing.allInRateByScenario[scenarioId]/100);
-  const intGdpPct      = annualInt/gdpUsd*100;
+  // Interest on ALL debt (existing + new war debt)
+  const existingDebtBn = country.debtGdpPct / 100 * gdpUsd;
+  const totalDebtBn    = existingDebtBn + newDebt;
+  const allInRate      = country.borrowing.allInRateByScenario[scenarioId] / 100;
+  const annualInt      = totalDebtBn * allInRate;
+  const intGdpPct      = annualInt / gdpUsd * 100;
   // Interest as % of total expenditure
-  const intExpPct      = annualInt/expUsd*100;
+  const intExpPct      = annualInt / expUsd * 100;
 
   const scBtnCls = (id) => {
     const a = scenarioId === id;
@@ -135,12 +140,16 @@ function FundingBlock({ country }) {
               <p className="text-xs text-gray-400">{fmtPct(sc.fiscalBalancePct)} of GDP</p>
             </div>
             <div>
-              <p className="text-xs text-gray-500 mb-0.5">SWF usable</p>
+              <p className="text-xs text-gray-500 mb-0.5">
+                {country.id==="kwt" ? "Future Generations Fund" : "SWF total"}
+              </p>
               <p className={`text-base font-semibold ${maxSwf<10?"text-red-700":maxSwf<50?"text-amber-700":"text-green-700"}`}>
                 {fmtUsd(maxSwf)}
               </p>
               <p className="text-xs text-gray-400">{fmtLcu(maxSwf,lcu,fx)}</p>
-              <p className="text-xs text-gray-400">{fmtPct2(country.swf.usableShare*100)} of ${country.swf.totalBn}bn</p>
+              <p className={`text-xs mt-0.5 ${usableSwf<5?"text-red-500 font-medium":"text-gray-400"}`}>
+                {fmtUsd(usableSwf)} immediately usable
+              </p>
             </div>
             <div>
               <p className="text-xs text-gray-500 mb-0.5">Borrowing rate</p>
@@ -250,16 +259,16 @@ function FundingBlock({ country }) {
               variant={swfRemaining<5?"red":swfRemaining<20?"amber":"green"} />
             <StatCard label="Annual interest cost"
               value={annualInt>0.01?`${fmtUsd(annualInt)}/yr`:"—"}
-              sub="on new war debt, recurring"
+              sub="on total debt (existing + new)"
               variant={annualInt>1?"red":annualInt>0.3?"amber":"neutral"} />
             <StatCard label="Interest — % of GDP"
               value={intGdpPct>0.01?fmtPct2(intGdpPct)+" of GDP":"—"}
-              sub="permanent annual drag"
+              sub="total debt servicing burden"
               variant={intGdpPct>2?"red":intGdpPct>0.5?"amber":"neutral"} />
             <StatCard label="Interest — % of budget"
               value={intExpPct>0.01?fmtPct2(intExpPct)+" of expenditure":"—"}
-              sub="share of total spending consumed"
-              variant={intExpPct>5?"red":intExpPct>2?"amber":"neutral"} />
+              sub="existing + war debt / total spend"
+              variant={intExpPct>15?"red":intExpPct>8?"amber":"neutral"} />
             <StatCard label="New debt / GDP"
               value={newDebt>0?fmtPct2(debtGdpPct)+" of GDP":"—"}
               sub="new debt added this year"
@@ -326,7 +335,16 @@ function CountryBuildYourOwn({ country }) {
     const gdp_chg = oil_sh*oil_chg + mfg_sh*(mfg_shk*warMos/12) + oth_sh*(oth_shk*warMos/12);
     const gdp26 = gdp_25*(1+gdp_chg);
     const bal = (rev26-exp26)/gdp26*100;
-    return { bal, delta:bal-base_pct, gdpGrowth:(gdp26/gdp_25-1)*100 };
+    const existDebt = ([22,30,134,24,30,38][i]) / 100 * gdpUsd;
+    const newDebtEst = Math.max(0, -(rev26-exp26)/1e3);
+    const totalDebt = existDebt + newDebtEst;
+    const debtToGdp = totalDebt / (gdpUsd * (1 + (gdp26/gdp_25-1))) * 100;
+    return {
+      bal, delta:bal-base_pct, gdpGrowth:(gdp26/gdp_25-1)*100,
+      rev: rev26/1e3, exp: exp26/1e3,
+      newDebt: newDebtEst, totalDebt, debtToGdp,
+      gdp: gdp26/1e3
+    };
   }, [warWeeks, milPct, subPct, nolPct, oilWar, oilPost, hormuzCl, warMos]);
 
   const Slider = ({ label, value, min, max, step, onChange, display, hint }) => (
@@ -372,18 +390,30 @@ function CountryBuildYourOwn({ country }) {
               {fmtPct(result.bal)}
             </p>
             <p className="text-sm text-gray-500 mb-3">fiscal balance % of GDP</p>
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <p className="text-xs text-gray-400">Δ vs no-war baseline</p>
-                <p className={`text-lg font-semibold ${result.delta>0?"text-green-600":"text-red-600"}`}>
-                  {fmtPct(result.delta)}
-                </p>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="bg-white rounded-lg p-2">
+                <p className="text-gray-400 mb-0.5">Δ vs baseline</p>
+                <p className={`font-semibold text-sm ${result.delta>0?"text-green-600":"text-red-600"}`}>{fmtPct(result.delta)}</p>
               </div>
-              <div>
-                <p className="text-xs text-gray-400">GDP growth 2026</p>
-                <p className={`text-lg font-semibold ${result.gdpGrowth>0?"text-green-600":"text-red-600"}`}>
-                  {fmtPct(result.gdpGrowth)}
-                </p>
+              <div className="bg-white rounded-lg p-2">
+                <p className="text-gray-400 mb-0.5">GDP growth</p>
+                <p className={`font-semibold text-sm ${result.gdpGrowth>0?"text-green-600":"text-red-600"}`}>{fmtPct(result.gdpGrowth)}</p>
+              </div>
+              <div className="bg-white rounded-lg p-2">
+                <p className="text-gray-400 mb-0.5">Revenue total</p>
+                <p className="font-semibold text-sm text-gray-800">${result.rev.toFixed(1)}bn</p>
+              </div>
+              <div className="bg-white rounded-lg p-2">
+                <p className="text-gray-400 mb-0.5">Expenditure total</p>
+                <p className="font-semibold text-sm text-gray-800">${result.exp.toFixed(1)}bn</p>
+              </div>
+              <div className="bg-white rounded-lg p-2">
+                <p className="text-gray-400 mb-0.5">Total debt</p>
+                <p className={`font-semibold text-sm ${result.totalDebt>100?"text-red-600":"text-gray-800"}`}>${result.totalDebt.toFixed(1)}bn</p>
+              </div>
+              <div className="bg-white rounded-lg p-2">
+                <p className="text-gray-400 mb-0.5">Debt / GDP</p>
+                <p className={`font-semibold text-sm ${result.debtToGdp>100?"text-red-600":result.debtToGdp>60?"text-amber-600":"text-gray-800"}`}>{result.debtToGdp.toFixed(1)}%</p>
               </div>
             </div>
           </div>

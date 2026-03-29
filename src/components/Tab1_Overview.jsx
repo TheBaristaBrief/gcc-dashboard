@@ -43,12 +43,12 @@ function HydrocarbonRevenueBar({ country }) {
       <div className="flex justify-between items-center mb-1">
         <span className="text-xs text-gray-600 font-medium">{country.name}</span>
         <div className="flex items-center gap-1.5">
-          {isGas && <span className="text-xs bg-purple-100 text-purple-700 px-1 py-0.5 rounded text-xs">LNG</span>}
+          {isGas && <span className="text-xs bg-amber-100 text-amber-700 px-1 py-0.5 rounded text-xs">LNG/Gas</span>}
           <span className="text-xs text-gray-400">{oil.toFixed(0)}% hydrocarbons</span>
         </div>
       </div>
       <div className="flex h-2.5 rounded-sm overflow-hidden">
-        <div className={`${isGas ? "bg-purple-500" : "bg-amber-500"}`} style={{ width: `${oil}%` }} />
+        <div className="bg-amber-500" style={{ width: `${oil}%` }} />
         <div className="bg-blue-400" style={{ width: `${nol}%` }} />
       </div>
       {country.id === "bhr" && (
@@ -133,6 +133,8 @@ function SWFCard({ country }) {
       </p>
       {isUAE ? (
         <p className="text-xs text-gray-400 mt-1 italic">Some may not be immediately accessible</p>
+      ) : isKuwait ? (
+        <p className="text-xs text-blue-600 mt-1">${swf.usableBn.toFixed(1)}bn GRF usable now</p>
       ) : (
         <p className={`text-xs mt-1 ${swf.usableBn < 5 ? "text-red-600 font-medium" : "text-gray-400"}`}>
           ${swf.usableBn >= 1 ? swf.usableBn.toFixed(0) : swf.usableBn.toFixed(1)}bn usable
@@ -170,16 +172,13 @@ export default function Tab1_Overview() {
             Revenue composition — hydrocarbon vs non-hydrocarbon
           </p>
           <p className="text-xs text-gray-400 mb-4">
-            Qatar exports LNG (gas), not crude — purple bar.
+            Qatar exports LNG (gas), not crude oil.
             Gas prices (JKM/TTF) are not directly linked to oil prices.
           </p>
           {COUNTRIES.map((c) => <HydrocarbonRevenueBar key={c.id} country={c} />)}
           <div className="flex gap-4 mt-3">
             <span className="flex items-center gap-1.5 text-xs text-gray-500">
-              <span className="w-3 h-3 rounded-sm bg-amber-500 inline-block" />Oil
-            </span>
-            <span className="flex items-center gap-1.5 text-xs text-gray-500">
-              <span className="w-3 h-3 rounded-sm bg-purple-500 inline-block" />LNG (Qatar)
+              <span className="w-3 h-3 rounded-sm bg-amber-500 inline-block" />Oil &amp; Gas
             </span>
             <span className="flex items-center gap-1.5 text-xs text-gray-500">
               <span className="w-3 h-3 rounded-sm bg-blue-400 inline-block" />Non-hydrocarbon
@@ -227,7 +226,7 @@ export default function Tab1_Overview() {
                 <th className="text-left font-medium text-gray-400 pb-2">Country</th>
                 <th className="text-center font-medium text-gray-400 pb-2">Balance</th>
                 <th className="text-center font-medium text-gray-400 pb-2">Hormuz</th>
-                <th className="text-center font-medium text-gray-400 pb-2">SWF usable</th>
+                <th className="text-center font-medium text-gray-400 pb-2">SWF total</th>
                 <th className="text-center font-medium text-gray-400 pb-2">Risk</th>
               </tr>
             </thead>
@@ -243,10 +242,10 @@ export default function Tab1_Overview() {
                       {c.hormuz.exposurePct}%
                     </span>
                   </td>
-                  <td className={`py-2 text-center font-semibold ${c.id === "kwt" ? "text-blue-600" : c.swf.usableBn < 5 ? "text-red-600" : c.swf.usableBn < 50 ? "text-amber-600" : "text-green-700"}`}>
-                    {c.id === "kwt"
-                      ? `$${c.swf.fgfBn >= 1000 ? (c.swf.fgfBn/1000).toFixed(1)+"T" : Math.round(c.swf.fgfBn)+"bn"}`
-                      : c.swf.usableBn > 0 ? `$${c.swf.usableBn >= 100 ? Math.round(c.swf.usableBn)+"bn" : c.swf.usableBn.toFixed(1)+"bn"}` : "None"}
+                  <td className={`py-2 text-center font-semibold ${c.swf.totalBn === 0 ? "text-red-600" : c.swf.totalBn < 50 ? "text-amber-600" : "text-green-700"}`}>
+                    {c.swf.totalBn > 0
+                      ? `$${c.swf.totalBn >= 1000 ? (c.swf.totalBn/1000).toFixed(1)+"T" : Math.round(c.swf.totalBn)+"bn"}`
+                      : "None"}
                     {c.id === "kwt" && <span className="text-blue-400 ml-0.5">†</span>}
                     {c.swf.illiquid && <span className="text-orange-500 ml-0.5">*</span>}
                   </td>

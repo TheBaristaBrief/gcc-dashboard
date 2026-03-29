@@ -1,7 +1,7 @@
 {
   "meta": {
     "modelVersion": "v2",
-    "lastUpdated": "2026-03-25",
+    "lastUpdated": "2026-03-29",
     "warStartDate": "2026-02-28",
     "today": "2026-03-25",
     "weeksElapsed": 3,
@@ -640,10 +640,10 @@
     }
   },
   "liveStatus": {
-    "conflictDay": 25,
-    "weeksElapsed": 3,
-    "oilPrice": 108.78,
-    "oilChange24h": 5.8,
+    "conflictDay": 30,
+    "weeksElapsed": 4,
+    "oilPrice": 109.40,
+    "oilChange24h": 0.62,
     "brentPeak": 126,
     "hormuzStatus": "Effectively closed",
     "tankerTransitsDown": "90%",
@@ -654,6 +654,10 @@
     "iraqProductionDown": 2.9,
     "globalSupplyLostMbd": 7.4,
     "keyEvents": [
+      {
+        "date": "29 Mar",
+        "event": "Day 30 — Hormuz closure enters 5th week, no diplomatic breakthrough reported"
+      },
       {
         "date": "11 Mar",
         "event": "IEA releases 400mb emergency reserves (largest in history)"
