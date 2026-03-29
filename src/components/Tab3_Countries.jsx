@@ -4,7 +4,7 @@ import data from "../data/gcc-model.json";
 const COUNTRIES = data.countries;
 const SCENARIOS = data.scenarios;
 const GDP_USD   = { kwt:146, qat:193, bhr:45, sau:1274, uae:564, omn:105 };
-const EXP_USD   = { kwt:6.51, qat:55.14, bhr:14.25, sau:370.14, uae:132.47, omn:31.82 };
+const EXP_USD   = { kwt:79.84, qat:55.14, bhr:14.25, sau:370.14, uae:132.47, omn:31.82 };
 const DEBT_CEIL = { kwt:3.0, qat:2.0, bhr:8.0, sau:2.5, uae:0, omn:0 };
 
 const fmtPct  = (v) => (v >= 0 ? "+" : "") + v.toFixed(1) + "%";
