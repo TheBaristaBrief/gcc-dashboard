@@ -11,7 +11,12 @@
     "oilAfterPrice": 70,
     "usTreasury10yr": 4.13,
     "sources": [
-      "IMF WEO Oct 2025",
+      "Saudi MOF Budget Statement FY2026 (Dec 2025)",
+      "Kuwait MOF FY2025/26 Budget (Feb 2025)",
+      "Qatar MOF State Budget 2026 (Law No. 26 of 2025)",
+      "Bahrain MOF 2025-2026 Two-Year Budget",
+      "Oman MOF State General Budget 2026",
+      "UAE MOF Federal Budget 2026 (Oct 2025) — federal only; consolidated uses IMF",
       "EIA STEO Mar 2026",
       "World Bank GEU Dec 2025",
       "BofA Hormuz disruption note Mar 2026",
@@ -26,7 +31,7 @@
     "tab1Sources": [
       {
         "label": "Fiscal balances & GDP",
-        "source": "IMF WEO October 2025; IMF Article IV consultations 2025-2026"
+        "source": "Official MOF 2026 budgets: Saudi (Dec 2025), Kuwait FY25/26 (Feb 2025), Qatar (Dec 2025), Bahrain 2-yr budget, Oman (Dec 2025). UAE consolidated: IMF WEO Oct 2025 (federal budget does not capture Abu Dhabi oil surplus)."
       },
       {
         "label": "Oil revenue shares",
@@ -71,16 +76,17 @@
       "gdpUsd": 146,
       "color": "#DC2626",
       "fiscal2025": {
-        "oilRevLcu": 17.4,
-        "nonOilRevLcu": 2.9,
-        "totalRevLcu": 20.28,
-        "expenditureLcu": 24.491,
-        "gdpLcu": 47.95
+        "oilRevLcu": 15.30,
+        "nonOilRevLcu": 2.92,
+        "totalRevLcu": 18.23,
+        "expenditureLcu": 24.54,
+        "gdpLcu": 47.95,
+        "source": "Kuwait MOF FY2025/26 Budget (Cabinet-approved Feb 2025); oil price assumption $68/bbl"
       },
       "baseline": {
-        "fiscalBalancePct": -10.3,
-        "oilRevShare": 85.8,
-        "nonOilRevShare": 14.2,
+        "fiscalBalancePct": -13.1,
+        "oilRevShare": 83.9,
+        "nonOilRevShare": 16.1,
         "breakevenOil": 90,
         "riskRating": "High"
       },
@@ -116,22 +122,22 @@
       "debtGdpPct": 22,
       "scenarios": {
         "A": {
-          "fiscalBalancePct": -17.6,
+          "fiscalBalancePct": -20.4,
           "delta": -7.3,
           "gdpGrowth": -3.8,
-          "newDebtBn": 3.4
+          "newDebtBn": 2.9
         },
         "B": {
-          "fiscalBalancePct": -23.1,
+          "fiscalBalancePct": -25.9,
           "delta": -12.8,
           "gdpGrowth": -4.6,
-          "newDebtBn": 5.4
+          "newDebtBn": 5.1
         },
         "C": {
-          "fiscalBalancePct": -37.6,
+          "fiscalBalancePct": -40.4,
           "delta": -27.3,
           "gdpGrowth": -7.2,
-          "newDebtBn": 12.1
+          "newDebtBn": 12.5
         }
       },
       "vulnerability": {
@@ -156,16 +162,17 @@
       "gdpUsd": 193,
       "color": "#7C3AED",
       "fiscal2025": {
-        "oilRevLcu": 166.317,
-        "nonOilRevLcu": 43.699,
-        "totalRevLcu": 210.0,
-        "expenditureLcu": 201.0,
-        "gdpLcu": 793.69
+        "oilRevLcu": 155.0,
+        "nonOilRevLcu": 44.0,
+        "totalRevLcu": 199.0,
+        "expenditureLcu": 220.8,
+        "gdpLcu": 793.69,
+        "source": "Qatar MOF State Budget 2026 (Law No. 26 of 2025, effective Jan 2026); oil price assumption $55/bbl (official conservative)"
       },
       "baseline": {
-        "fiscalBalancePct": -0.2,
-        "oilRevShare": 79.2,
-        "nonOilRevShare": 20.8,
+        "fiscalBalancePct": -2.6,
+        "oilRevShare": 77.9,
+        "nonOilRevShare": 22.1,
         "breakevenOil": 55,
         "riskRating": "Medium"
       },
@@ -199,24 +206,24 @@
       "debtGdpPct": 41,
       "scenarios": {
         "A": {
-          "fiscalBalancePct": -5.9,
+          "fiscalBalancePct": -8.3,
           "delta": -5.7,
           "gdpGrowth": -3.2,
-          "newDebtBn": 1.4,
+          "newDebtBn": 1.5,
           "rasLaffanNote": "Includes ~2% GDP partial-year Ras Laffan impact"
         },
         "B": {
-          "fiscalBalancePct": -9.5,
+          "fiscalBalancePct": -11.9,
           "delta": -9.3,
           "gdpGrowth": -5.0,
-          "newDebtBn": 2.4,
+          "newDebtBn": 3.1,
           "rasLaffanNote": "Includes ~3% GDP Ras Laffan impact"
         },
         "C": {
-          "fiscalBalancePct": -17.1,
+          "fiscalBalancePct": -19.5,
           "delta": -16.9,
           "gdpGrowth": -8.1,
-          "newDebtBn": 7.5,
+          "newDebtBn": 8.0,
           "rasLaffanNote": "Includes full ~4% GDP Ras Laffan permanent damage"
         }
       },
@@ -266,17 +273,18 @@
       "gdpUsd": 45,
       "color": "#B45309",
       "fiscal2025": {
-        "oilRevLcu": 1.774,
-        "nonOilRevLcu": 1.5,
-        "totalRevLcu": 3.27,
-        "expenditureLcu": 5.378,
-        "gdpLcu": 18.29
+        "oilRevLcu": 1.63,
+        "nonOilRevLcu": 1.829,
+        "totalRevLcu": 3.459,
+        "expenditureLcu": 4.537,
+        "gdpLcu": 18.29,
+        "source": "Bahrain MOF 2025-2026 Two-Year State General Budget (second year, FY2026)"
       },
       "baseline": {
-        "fiscalBalancePct": -13.0,
-        "oilRevShare": 54.2,
-        "nonOilRevShare": 45.8,
-        "breakevenOil": 110,
+        "fiscalBalancePct": -6.3,
+        "oilRevShare": 47.1,
+        "nonOilRevShare": 52.9,
+        "breakevenOil": 125,
         "riskRating": "Critical"
       },
       "hormuz": {
@@ -311,22 +319,22 @@
       "debtGdpPct": 134,
       "scenarios": {
         "A": {
-          "fiscalBalancePct": -16.4,
+          "fiscalBalancePct": -9.7,
           "delta": -3.4,
           "gdpGrowth": -2.8,
-          "newDebtBn": 5.2
+          "newDebtBn": 0.4
         },
         "B": {
-          "fiscalBalancePct": -18.7,
+          "fiscalBalancePct": -12.0,
           "delta": -5.7,
           "gdpGrowth": -5.0,
-          "newDebtBn": 8.4
+          "newDebtBn": 0.7
         },
         "C": {
-          "fiscalBalancePct": -24.4,
+          "fiscalBalancePct": -17.7,
           "delta": -11.4,
           "gdpGrowth": -8.0,
-          "newDebtBn": 11.0
+          "newDebtBn": 1.7
         }
       },
       "vulnerability": {
@@ -349,19 +357,20 @@
       "name": "Saudi Arabia",
       "lcu": "SAR",
       "fxToUsd": 0.2666,
-      "gdpUsd": 1274,
+      "gdpUsd": 1322,
       "color": "#047857",
       "fiscal2025": {
-        "oilRevLcu": 606.545,
-        "nonOilRevLcu": 505.284,
-        "totalRevLcu": 1111.8,
-        "expenditureLcu": 1388.433,
-        "gdpLcu": 4788.54
+        "oilRevLcu": 590.0,
+        "nonOilRevLcu": 557.0,
+        "totalRevLcu": 1147.0,
+        "expenditureLcu": 1312.0,
+        "gdpLcu": 4960.0,
+        "source": "Saudi MOF Budget Statement FY2026 (released Dec 2025); oil revenues SAR 590bn, non-oil SAR 557bn, expenditure SAR 1,312bn; oil price assumption ~$72/bbl implied"
       },
       "baseline": {
-        "fiscalBalancePct": -6.4,
-        "oilRevShare": 54.6,
-        "nonOilRevShare": 45.4,
+        "fiscalBalancePct": -3.3,
+        "oilRevShare": 51.4,
+        "nonOilRevShare": 48.6,
         "breakevenOil": 84,
         "riskRating": "Medium"
       },
@@ -395,22 +404,22 @@
       "debtGdpPct": 32,
       "scenarios": {
         "A": {
-          "fiscalBalancePct": -7.6,
+          "fiscalBalancePct": -4.5,
           "delta": -1.2,
           "gdpGrowth": -0.3,
-          "newDebtBn": 9.3
+          "newDebtBn": 5.7
         },
         "B": {
-          "fiscalBalancePct": -8.5,
+          "fiscalBalancePct": -5.4,
           "delta": -2.1,
           "gdpGrowth": -0.4,
-          "newDebtBn": 13.4
+          "newDebtBn": 9.6
         },
         "C": {
-          "fiscalBalancePct": -10.3,
+          "fiscalBalancePct": -7.2,
           "delta": -3.9,
           "gdpGrowth": -0.8,
-          "newDebtBn": 24.9
+          "newDebtBn": 20.1
         }
       },
       "vulnerability": {
@@ -526,17 +535,18 @@
       "gdpUsd": 105,
       "color": "#0891B2",
       "fiscal2025": {
-        "oilRevLcu": 8.187,
-        "nonOilRevLcu": 3.573,
-        "totalRevLcu": 11.76,
-        "expenditureLcu": 12.24,
-        "gdpLcu": 37.27
+        "oilRevLcu": 7.713,
+        "nonOilRevLcu": 3.734,
+        "totalRevLcu": 11.447,
+        "expenditureLcu": 11.977,
+        "gdpLcu": 37.27,
+        "source": "Oman MOF State General Budget 2026 (11th Five-Year Plan); oil price assumption $60/bbl; oil+gas net revenues combined OMR 7.713bn (oil OMR 5.752bn + gas OMR 1.961bn)"
       },
       "baseline": {
-        "fiscalBalancePct": -0.9,
-        "oilRevShare": 69.6,
-        "nonOilRevShare": 30.4,
-        "breakevenOil": 52,
+        "fiscalBalancePct": -1.3,
+        "oilRevShare": 67.4,
+        "nonOilRevShare": 32.6,
+        "breakevenOil": 62,
         "riskRating": "Beneficiary",
         "dotColor": "gray"
       },
@@ -570,19 +580,19 @@
       "debtGdpPct": 35,
       "scenarios": {
         "A": {
-          "fiscalBalancePct": 1.9,
+          "fiscalBalancePct": 1.5,
           "delta": 2.8,
           "gdpGrowth": 4.2,
           "newDebtBn": 0
         },
         "B": {
-          "fiscalBalancePct": 2.4,
+          "fiscalBalancePct": 2.0,
           "delta": 3.3,
           "gdpGrowth": 7.9,
           "newDebtBn": 0
         },
         "C": {
-          "fiscalBalancePct": 3.1,
+          "fiscalBalancePct": 2.7,
           "delta": 4.0,
           "gdpGrowth": 12.1,
           "newDebtBn": 0
