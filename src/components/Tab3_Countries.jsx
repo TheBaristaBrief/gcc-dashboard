@@ -3,6 +3,7 @@ import data from "../data/gcc-model.json";
 
 const COUNTRIES = data.countries;
 const SCENARIOS = data.scenarios;
+const LIVE      = data.liveStatus;
 const GDP_USD   = { kwt:146, qat:193, bhr:45, sau:1274, uae:564, omn:105 };
 const EXP_USD   = { kwt:79.84, qat:55.14, bhr:14.25, sau:370.14, uae:132.47, omn:31.82 };
 const DEBT_CEIL = { kwt:3.0, qat:2.0, bhr:8.0, sau:2.5, uae:0, omn:0 };
@@ -287,20 +288,35 @@ function FundingBlock({ country }) {
 // ── Per-country Build Your Own ────────────────────────────────────────────
 function CountryBuildYourOwn({ country }) {
   const gdpUsd = GDP_USD[country.id];
-  const [warWeeks, setWarWeeks] = useState(7);
-  const [milPct,   setMilPct]   = useState(
-    { kwt:2, qat:1, bhr:1, sau:4, uae:2, omn:0.5 }[country.id] || 2
-  );
-  const [subPct,   setSubPct]   = useState(
-    { kwt:1, qat:1, bhr:1.5, sau:2, uae:1, omn:0.5 }[country.id] || 1
-  );
-  const [nolPct,   setNolPct]   = useState(
-    { kwt:2, qat:5, bhr:6, sau:2, uae:4, omn:1 }[country.id] || 2
-  );
-  const [oilWar,   setOilWar]   = useState(125);
-  const [oilPost,  setOilPost]  = useState(70);
-  const [hormuzCl, setHormuzCl] = useState(100);
-  const [debtSplit, setDebtSplit] = useState(50); // % of deficit funded by new debt (0=all SWF, 100=all debt)
+
+  // "Today" defaults — pulled live from JSON so reset always reflects reality
+  const DEF_MIL  = { kwt:2, qat:1, bhr:1, sau:4, uae:2, omn:0.5 }[country.id] || 2;
+  const DEF_SUB  = { kwt:1, qat:1, bhr:1.5, sau:2, uae:1, omn:0.5 }[country.id] || 1;
+  const DEF_NOL  = { kwt:2, qat:5, bhr:6, sau:2, uae:4, omn:1 }[country.id] || 2;
+  const DEF_WEEKS = LIVE.weeksElapsed;                          // e.g. 4 weeks into war
+  const DEF_OIL  = Math.round(LIVE.oilPrice / 5) * 5;          // current Brent rounded to $5
+  const DEF_POST = 70;                                          // BofA mid-cycle
+  const DEF_HORMUZ = 100;                                       // effectively closed
+
+  const [warWeeks, setWarWeeks] = useState(DEF_WEEKS);
+  const [milPct,   setMilPct]   = useState(DEF_MIL);
+  const [subPct,   setSubPct]   = useState(DEF_SUB);
+  const [nolPct,   setNolPct]   = useState(DEF_NOL);
+  const [oilWar,   setOilWar]   = useState(DEF_OIL);
+  const [oilPost,  setOilPost]  = useState(DEF_POST);
+  const [hormuzCl, setHormuzCl] = useState(DEF_HORMUZ);
+  const [debtSplit, setDebtSplit] = useState(50);
+
+  const resetToToday = () => {
+    setWarWeeks(DEF_WEEKS);
+    setOilWar(DEF_OIL);
+    setOilPost(DEF_POST);
+    setHormuzCl(DEF_HORMUZ);
+    setMilPct(DEF_MIL);
+    setSubPct(DEF_SUB);
+    setNolPct(DEF_NOL);
+    setDebtSplit(50);
+  };
 
   const warMos = warWeeks / 4.33;
   const oilAvg = (2*69 + warMos*oilWar + Math.max(0,10-warMos)*oilPost) / 12;
@@ -367,9 +383,18 @@ function CountryBuildYourOwn({ country }) {
 
   return (
     <div className="border border-gray-200 rounded-xl p-5">
-      <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">
-        Build your own — {country.name} specific
-      </p>
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-xs font-medium uppercase tracking-widest text-gray-400">
+          Build your own — {country.name} specific
+        </p>
+        <button
+          onClick={resetToToday}
+          className="flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg transition-colors"
+          title={`Reset to today: ${DEF_WEEKS}wk war · $${DEF_OIL}/bbl · ${DEF_HORMUZ}% Hormuz`}
+        >
+          ↺ Reset to today
+        </button>
+      </div>
       <div className="grid grid-cols-2 gap-6">
         <div>
           <Slider label="War duration" value={warWeeks} min={1} max={16} step={1}
