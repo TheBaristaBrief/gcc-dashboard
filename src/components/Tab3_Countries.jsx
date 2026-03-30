@@ -522,18 +522,12 @@ function CountryBuildYourOwn({ country }) {
               <span>No-war baseline</span>
               <span className="font-medium">{fmtPct(country.baseline.fiscalBalancePct)}</span>
             </div>
-            <div className="flex justify-between">
-              <span>Scenario A</span>
-              <span className="font-medium">{fmtPct(country.scenarios.A.fiscalBalancePct)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Scenario B</span>
-              <span className="font-medium">{fmtPct(country.scenarios.B.fiscalBalancePct)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Scenario C</span>
-              <span className="font-medium">{fmtPct(country.scenarios.C.fiscalBalancePct)}</span>
-            </div>
+            {["A","B","C"].map(id => (
+              <div key={id} className="flex justify-between">
+                <span>{SCENARIOS[id].label}</span>
+                <span className="font-medium">{fmtPct(country.scenarios[id].fiscalBalancePct)}</span>
+              </div>
+            ))}
             <div className="flex justify-between font-medium text-gray-700 border-t border-gray-200 pt-1.5 mt-1.5">
               <span>Your scenario</span>
               <span className={result.bal>=0?"text-green-700":result.bal>-10?"text-amber-700":"text-red-700"}>

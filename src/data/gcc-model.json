@@ -622,8 +622,8 @@
   "scenarios": {
     "A": {
       "id": "A",
-      "label": "Scenario A",
-      "sublabel": "+2 weeks from today",
+      "label": "Optimistic",
+      "sublabel": "Trump deal · reopens ~1 week",
       "daysFromToday": 14,
       "totalWeeks": 5,
       "warMonths": 1.15,
@@ -634,8 +634,8 @@
     },
     "B": {
       "id": "B",
-      "label": "Scenario B",
-      "sublabel": "+1 month from today",
+      "label": "Base",
+      "sublabel": "Negotiations drag · ~1 month",
       "daysFromToday": 30,
       "totalWeeks": 7,
       "warMonths": 1.62,
@@ -647,8 +647,8 @@
     },
     "C": {
       "id": "C",
-      "label": "Scenario C",
-      "sublabel": "+2 months from today",
+      "label": "Pessimistic",
+      "sublabel": "Deal collapses · ~2 months",
       "daysFromToday": 60,
       "totalWeeks": 11,
       "warMonths": 2.54,
