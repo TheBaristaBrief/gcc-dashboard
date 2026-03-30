@@ -173,7 +173,8 @@
         "fiscalBalancePct": -2.4,
         "oilRevShare": 77.9,
         "nonOilRevShare": 22.1,
-        "breakevenOil": 55,
+        "breakevenOil": 63,
+        "breakevenNote": "MOF budget built at $55/bbl planning assumption but still projects QAR 21.8bn deficit. Actual breakeven (deficit=0) implied at ~$63/bbl. $55 is conservative planning price, not the breakeven.",
         "riskRating": "Medium"
       },
       "hormuz": {

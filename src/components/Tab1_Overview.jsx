@@ -165,18 +165,67 @@ export default function Tab1_Overview() {
         </p>
       </div>
 
-      {/* Revenue + Hormuz */}
-      <div className="grid grid-cols-2 gap-5">
-        <div className="border border-gray-200 rounded-xl p-5">
-          <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-1">
-            Revenue composition — hydrocarbon vs non-hydrocarbon
-          </p>
-          <p className="text-xs text-gray-400 mb-4">
-            Qatar exports LNG (gas), not crude oil.
-            Gas prices (JKM/TTF) are not directly linked to oil prices.
-          </p>
-          {COUNTRIES.map((c) => <HydrocarbonRevenueBar key={c.id} country={c} />)}
-          <div className="flex gap-4 mt-3">
+      {/* Revenue + Hormuz — unified synchronized layout */}
+      <div className="border border-gray-200 rounded-xl p-5">
+        <div className="grid grid-cols-2 gap-8 mb-4">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-1">
+              Revenue composition — hydrocarbon vs non-hydrocarbon
+            </p>
+            <p className="text-xs text-gray-400">
+              Qatar exports LNG (gas), not crude oil. Gas prices (JKM/TTF) not directly linked to oil.
+            </p>
+          </div>
+          <div>
+            <p className="text-xs font-medium uppercase tracking-widest text-gray-400">
+              Hormuz dependency — exports at risk
+            </p>
+          </div>
+        </div>
+
+        {COUNTRIES.map((c) => {
+          const oil = c.baseline.oilRevShare;
+          const nonHydro = 100 - oil;
+          const isGas = c.id === "qat";
+          const exp = c.hormuz.exposurePct;
+          const byp = 100 - exp;
+          const isFree = exp === 0;
+          return (
+            <div key={c.id} className="grid grid-cols-2 gap-8 mb-3">
+              {/* Revenue bar */}
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-xs text-gray-600 font-medium">{c.name}</span>
+                  <div className="flex items-center gap-1.5">
+                    {isGas && <span className="text-xs bg-amber-100 text-amber-700 px-1 py-0.5 rounded">LNG/Gas</span>}
+                    <span className="text-xs text-gray-400">{oil.toFixed(0)}% hydro</span>
+                  </div>
+                </div>
+                <div className="flex h-2.5 rounded-sm overflow-hidden">
+                  <div className="bg-amber-500" style={{ width: `${oil}%` }} />
+                  <div className="bg-blue-400" style={{ width: `${nonHydro}%` }} />
+                </div>
+              </div>
+              {/* Hormuz bar */}
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-xs text-gray-600 font-medium">{c.name}</span>
+                  <span className={`text-xs font-semibold ${isFree ? "text-green-600" : exp === 100 ? "text-red-600" : "text-amber-600"}`}>
+                    {isFree ? "Hormuz-free" : `${exp}% exposed`}
+                  </span>
+                </div>
+                <div className="flex h-2.5 rounded-sm overflow-hidden">
+                  <div className="bg-red-400" style={{ width: `${exp}%` }} />
+                  <div className="bg-green-400" style={{ width: `${byp}%` }} />
+                </div>
+                <p className="text-xs text-gray-400 mt-0.5 leading-tight">{c.hormuz.bypassDescription}</p>
+              </div>
+            </div>
+          );
+        })}
+
+        <div className="grid grid-cols-2 gap-8 mt-3 pt-3 border-t border-gray-100">
+          <div className="flex gap-4">
             <span className="flex items-center gap-1.5 text-xs text-gray-500">
               <span className="w-3 h-3 rounded-sm bg-amber-500 inline-block" />Oil &amp; Gas
             </span>
@@ -184,14 +233,7 @@ export default function Tab1_Overview() {
               <span className="w-3 h-3 rounded-sm bg-blue-400 inline-block" />Non-hydrocarbon
             </span>
           </div>
-        </div>
-
-        <div className="border border-gray-200 rounded-xl p-5">
-          <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">
-            Hormuz dependency — exports at risk
-          </p>
-          {COUNTRIES.map((c) => <HormuzBar key={c.id} country={c} />)}
-          <div className="flex gap-4 mt-3">
+          <div className="flex gap-4">
             <span className="flex items-center gap-1.5 text-xs text-gray-500">
               <span className="w-3 h-3 rounded-sm bg-red-400 inline-block" />Hormuz-dependent
             </span>
@@ -212,7 +254,7 @@ export default function Tab1_Overview() {
             {COUNTRIES.map((c) => <BreakevenCard key={c.id} country={c} />)}
           </div>
           <p className="text-xs text-gray-400 mt-3">
-            Pre-war baseline $65/bbl · No-war scenario · Source: IMF REO MENAP Oct 2025
+            Price at which fiscal balance = zero · Sources: IMF REO MENAP Oct 2025; official MOF budgets 2026 · Qatar: MOF budget built at $55/bbl planning assumption; actual breakeven implied ~$63
           </p>
         </div>
 
