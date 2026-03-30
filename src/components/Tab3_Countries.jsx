@@ -335,15 +335,17 @@ function CountryBuildYourOwn({ country }) {
     const gdp_chg = oil_sh*oil_chg + mfg_sh*(mfg_shk*warMos/12) + oth_sh*(oth_shk*warMos/12);
     const gdp26 = gdp_25*(1+gdp_chg);
     const bal = (rev26-exp26)/gdp26*100;
+    const fx = country.fxToUsd;
     const existDebt = ([22,30,134,24,30,38][i]) / 100 * gdpUsd;
-    const newDebtEst = Math.max(0, -(rev26-exp26)/1e3);
+    const newDebtEst = Math.max(0, -(rev26-exp26) * fx);
     const totalDebt = existDebt + newDebtEst;
     const debtToGdp = totalDebt / (gdpUsd * (1 + (gdp26/gdp_25-1))) * 100;
     return {
       bal, delta:bal-base_pct, gdpGrowth:(gdp26/gdp_25-1)*100,
-      rev: rev26/1e3, exp: exp26/1e3,
+      rev: rev26,  // LCU bn
+      exp: exp26,  // LCU bn
       newDebt: newDebtEst, totalDebt, debtToGdp,
-      gdp: gdp26/1e3
+      gdp: gdp26 * fx
     };
   }, [warWeeks, milPct, subPct, nolPct, oilWar, oilPost, hormuzCl, warMos]);
 
@@ -401,11 +403,15 @@ function CountryBuildYourOwn({ country }) {
               </div>
               <div className="bg-white rounded-lg p-2">
                 <p className="text-gray-400 mb-0.5">Revenue total</p>
-                <p className="font-semibold text-sm text-gray-800">${result.rev.toFixed(1)}bn</p>
+                <p className="font-semibold text-sm text-gray-800">
+                  {result.rev >= 100 ? result.rev.toFixed(0) : result.rev.toFixed(1)}bn {country.lcu}
+                </p>
               </div>
               <div className="bg-white rounded-lg p-2">
                 <p className="text-gray-400 mb-0.5">Expenditure total</p>
-                <p className="font-semibold text-sm text-gray-800">${result.exp.toFixed(1)}bn</p>
+                <p className="font-semibold text-sm text-gray-800">
+                  {result.exp >= 100 ? result.exp.toFixed(0) : result.exp.toFixed(1)}bn {country.lcu}
+                </p>
               </div>
               <div className="bg-white rounded-lg p-2">
                 <p className="text-gray-400 mb-0.5">Total debt</p>
