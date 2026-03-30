@@ -300,6 +300,7 @@ function CountryBuildYourOwn({ country }) {
   const [oilWar,   setOilWar]   = useState(125);
   const [oilPost,  setOilPost]  = useState(70);
   const [hormuzCl, setHormuzCl] = useState(100);
+  const [debtSplit, setDebtSplit] = useState(50); // % of deficit funded by new debt (0=all SWF, 100=all debt)
 
   const warMos = warWeeks / 4.33;
   const oilAvg = (2*69 + warMos*oilWar + Math.max(0,10-warMos)*oilPost) / 12;
@@ -309,16 +310,17 @@ function CountryBuildYourOwn({ country }) {
     const oil_sh   = [0.858,0.792,0.542,0.546,0.527,0.696][i];
     const bypass_v = [0,0,0,3.0,1.8,0.8][i];
     const fullprod = [2.59,0.77,0.18,10.15,3.40,0.81][i];
-    const nol_25   = [2.90,43.699,1.500,505.284,280.193,3.573][i];
-    const oil_25   = [17.40,166.317,1.774,606.545,312.782,8.187][i];
-    const exp_25   = [24.491,201.0,5.378,1388.433,486.683,12.240][i];
-    const gdp_25   = [47.95,793.69,18.29,4788.54,2105.62,37.27][i];
+    // MOF official 2026 budget figures (LCU bn) — updated from fiscal2025 JSON fields
+    const nol_25   = [3.5,   44,    1.829, 557,    280.193, 3.734][i];  // non-oil revenue
+    const oil_25   = [12.8,  155,   1.63,  590,    312.782, 7.713][i];  // hydrocarbon revenue
+    const exp_25   = [26.1,  220.8, 4.537, 1313,   486.683, 11.977][i]; // expenditure
+    const gdp_25   = [47.95, 908,   17.82, 4960,   2105.62, 41.5][i];   // GDP
+    const base_pct = [-20.4, -2.4,  -6.1,  -3.3,   4.5,     -1.3][i];  // pre-war fiscal balance % (MOF)
     const imf_sp   = [0.0245,0.0538,0.0358,0.0328,0.0397,-0.0144][i];
     const mfg_sh   = [0.08,0.077,0.20,0.158,0.093,0.106][i];
     const oth_sh   = [0.52,0.57,0.67,0.67,0.72,0.52][i];
     const mfg_shk  = [-0.80,-0.90,-0.60,-0.60,-0.40,0.0][i];
     const oth_shk  = [-0.10,-0.10,-0.15,-0.05,-0.15,0.0][i];
-    const base_pct = [-10.3,-0.2,-13.0,-6.4,4.5,-0.9][i];
     const cl = hormuzCl/100;
 
     const byp_f = Math.min(1, Math.max(0,(bypass_v+0.1*fullprod)/fullprod));
@@ -342,8 +344,9 @@ function CountryBuildYourOwn({ country }) {
     const debtToGdp = totalDebt / (gdpUsd * (1 + (gdp26/gdp_25-1))) * 100;
     return {
       bal, delta:bal-base_pct, gdpGrowth:(gdp26/gdp_25-1)*100,
-      rev: rev26,  // LCU bn
-      exp: exp26,  // LCU bn
+      rev: rev26,         // LCU bn
+      exp: exp26,         // LCU bn
+      deficit: rev26-exp26, // LCU bn (negative = deficit)
       newDebt: newDebtEst, totalDebt, debtToGdp,
       gdp: gdp26 * fx
     };
@@ -392,6 +395,7 @@ function CountryBuildYourOwn({ country }) {
               {fmtPct(result.bal)}
             </p>
             <p className="text-sm text-gray-500 mb-3">fiscal balance % of GDP</p>
+            {/* ── Fiscal outcomes grid ── */}
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div className="bg-white rounded-lg p-2">
                 <p className="text-gray-400 mb-0.5">Δ vs baseline</p>
@@ -413,6 +417,17 @@ function CountryBuildYourOwn({ country }) {
                   {result.exp >= 100 ? result.exp.toFixed(0) : result.exp.toFixed(1)}bn {country.lcu}
                 </p>
               </div>
+              {/* Fiscal deficit — full width row */}
+              <div className={`col-span-2 rounded-lg p-2 ${result.deficit<0?"bg-red-50":"bg-green-50"}`}>
+                <p className="text-gray-400 mb-0.5">Fiscal {result.deficit<0?"deficit":"surplus"} (nominal)</p>
+                <p className={`font-semibold text-sm ${result.deficit<0?"text-red-700":"text-green-700"}`}>
+                  {result.deficit<0?"-":"+"}
+                  {Math.abs(result.deficit) >= 100 ? Math.abs(result.deficit).toFixed(0) : Math.abs(result.deficit).toFixed(1)}bn {country.lcu}
+                  <span className="font-normal text-gray-400 ml-2">
+                    (${(Math.abs(result.deficit)*country.fxToUsd).toFixed(1)}bn USD)
+                  </span>
+                </p>
+              </div>
               <div className="bg-white rounded-lg p-2">
                 <p className="text-gray-400 mb-0.5">Total debt</p>
                 <p className={`font-semibold text-sm ${result.totalDebt>100?"text-red-600":"text-gray-800"}`}>${result.totalDebt.toFixed(1)}bn</p>
@@ -422,6 +437,59 @@ function CountryBuildYourOwn({ country }) {
                 <p className={`font-semibold text-sm ${result.debtToGdp>100?"text-red-600":result.debtToGdp>60?"text-amber-600":"text-gray-800"}`}>{result.debtToGdp.toFixed(1)}%</p>
               </div>
             </div>
+
+            {/* ── Fund the deficit ── */}
+            {result.deficit < 0 && (() => {
+              const defAbs = Math.abs(result.deficit);
+              const debtFrac = debtSplit / 100;
+              const swfFrac  = 1 - debtFrac;
+              const debtLcu  = debtFrac * defAbs;
+              const swfLcu   = swfFrac  * defAbs;
+              const debtUsd  = debtLcu  * country.fxToUsd;
+              const swfUsd   = swfLcu   * country.fxToUsd;
+              const rate     = country.borrowing.allInRate;
+              const intUsd   = debtUsd  * rate / 100;
+              const swfTotal = country.swf.totalBn;
+              const swfLeft  = swfTotal - swfUsd;
+              const swfLeftPct = swfTotal > 0 ? (swfLeft / swfTotal * 100) : 100;
+              const fmt = v => v >= 100 ? v.toFixed(0) : v.toFixed(1);
+              return (
+                <div className="mt-3 border-t border-gray-100 pt-3">
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-widest mb-2">Fund the deficit</p>
+                  <div className="mb-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-xs font-medium text-gray-600">
+                        New debt <span className="text-amber-600 font-semibold">{debtSplit}%</span>
+                        {" "}vs SWF drawdown <span className="text-blue-600 font-semibold">{100-debtSplit}%</span>
+                      </label>
+                    </div>
+                    <input type="range" min={0} max={100} step={5} value={debtSplit}
+                      onChange={e=>setDebtSplit(Number(e.target.value))} className="w-full" />
+                    <div className="flex justify-between text-xs text-gray-400 mt-0.5">
+                      <span>◀ 100% SWF</span><span>100% debt ▶</span>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-xs mt-2">
+                    <div className="bg-amber-50 rounded-lg p-2">
+                      <p className="text-gray-400 mb-0.5">New debt raised</p>
+                      <p className="font-semibold text-sm text-amber-700">{fmt(debtLcu)}bn {country.lcu}</p>
+                      <p className="text-gray-400">${debtUsd.toFixed(1)}bn · int. ${intUsd.toFixed(1)}bn/yr @ {rate.toFixed(2)}%</p>
+                    </div>
+                    <div className="bg-blue-50 rounded-lg p-2">
+                      <p className="text-gray-400 mb-0.5">SWF drawdown</p>
+                      <p className="font-semibold text-sm text-blue-700">{fmt(swfLcu)}bn {country.lcu}</p>
+                      <p className="text-gray-400">${swfUsd.toFixed(1)}bn of ${swfTotal}bn total</p>
+                    </div>
+                    <div className={`col-span-2 rounded-lg p-2 ${swfLeftPct<20?"bg-red-50":swfLeftPct<50?"bg-amber-50":"bg-green-50"}`}>
+                      <p className="text-gray-400 mb-0.5">SWF remaining after drawdown</p>
+                      <p className={`font-semibold text-sm ${swfLeftPct<20?"text-red-700":swfLeftPct<50?"text-amber-700":"text-green-700"}`}>
+                        ${swfLeft.toFixed(0)}bn <span className="font-normal text-gray-400">({swfLeftPct.toFixed(0)}% of fund left)</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
           </div>
           <div className="space-y-1.5 text-xs text-gray-500">
             <div className="flex justify-between">
