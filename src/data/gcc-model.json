@@ -159,18 +159,18 @@
       "name": "Qatar",
       "lcu": "QAR",
       "fxToUsd": 0.274,
-      "gdpUsd": 193,
+      "gdpUsd": 249,
       "color": "#7C3AED",
       "fiscal2025": {
         "oilRevLcu": 155.0,
         "nonOilRevLcu": 44.0,
         "totalRevLcu": 199.0,
         "expenditureLcu": 220.8,
-        "gdpLcu": 793.69,
-        "source": "Qatar MOF State Budget 2026 (Law No. 26 of 2025, effective Jan 2026); oil price assumption $55/bbl (official conservative)"
+        "gdpLcu": 908.0,
+        "source": "Qatar MOF State Budget 2026 (Law No. 26 of 2025, effective Jan 2026); oil price assumption $55/bbl (official conservative). GDP: $249bn per Emirates NBD 2026 forecast; QAR 908bn at 3.645 rate"
       },
       "baseline": {
-        "fiscalBalancePct": -2.6,
+        "fiscalBalancePct": -2.4,
         "oilRevShare": 77.9,
         "nonOilRevShare": 22.1,
         "breakevenOil": 55,
@@ -182,16 +182,16 @@
         "bypassDescription": "Zero bypass \u2014 100% Hormuz dependent for LNG exports. PLUS: Iranian missile strikes on Ras Laffan (18-19 Mar) destroyed 17% of LNG capacity \u2014 Trains 4 & 6 offline for 3-5 years regardless of Hormuz status. Force majeure declared on long-term contracts with China, South Korea, Italy, Belgium."
       },
       "swf": {
-        "totalBn": 510,
+        "totalBn": 526,
         "usableShare": 0.7,
-        "usableBn": 357,
-        "note": "QIA \u2014 fully accessible, no legal drawdown cap"
+        "usableBn": 368,
+        "note": "QIA \u2014 fully accessible, no legal drawdown cap. Source: SWFI Feb 2025"
       },
       "borrowing": {
         "preWarSpreadBps": 55,
         "warPremiumBps": 35,
         "allInRate": 5.03,
-        "creditRating": "AA- (S&P)",
+        "creditRating": "AA (S&P)",
         "warPremiumByScenario": {
           "A": 15,
           "B": 35,
@@ -206,24 +206,24 @@
       "debtGdpPct": 41,
       "scenarios": {
         "A": {
-          "fiscalBalancePct": -8.3,
+          "fiscalBalancePct": -8.1,
           "delta": -5.7,
           "gdpGrowth": -3.2,
-          "newDebtBn": 1.5,
+          "newDebtBn": 2.0,
           "rasLaffanNote": "Includes ~2% GDP partial-year Ras Laffan impact"
         },
         "B": {
-          "fiscalBalancePct": -11.9,
+          "fiscalBalancePct": -11.7,
           "delta": -9.3,
           "gdpGrowth": -5.0,
-          "newDebtBn": 3.1,
+          "newDebtBn": 4.0,
           "rasLaffanNote": "Includes ~3% GDP Ras Laffan impact"
         },
         "C": {
-          "fiscalBalancePct": -19.5,
+          "fiscalBalancePct": -19.3,
           "delta": -16.9,
           "gdpGrowth": -8.1,
-          "newDebtBn": 8.0,
+          "newDebtBn": 10.3,
           "rasLaffanNote": "Includes full ~4% GDP Ras Laffan permanent damage"
         }
       },
@@ -270,18 +270,18 @@
       "name": "Bahrain",
       "lcu": "BHD",
       "fxToUsd": 2.65,
-      "gdpUsd": 45,
+      "gdpUsd": 47,
       "color": "#B45309",
       "fiscal2025": {
         "oilRevLcu": 1.63,
         "nonOilRevLcu": 1.829,
         "totalRevLcu": 3.459,
         "expenditureLcu": 4.537,
-        "gdpLcu": 18.29,
-        "source": "Bahrain MOF 2025-2026 Two-Year State General Budget (second year, FY2026)"
+        "gdpLcu": 17.82,
+        "source": "Bahrain MOF 2025-2026 Two-Year State General Budget (second year, FY2026). GDP: IMF 2025 = $47.4bn / BHD 17.82bn"
       },
       "baseline": {
-        "fiscalBalancePct": -6.3,
+        "fiscalBalancePct": -6.1,
         "oilRevShare": 47.1,
         "nonOilRevShare": 52.9,
         "breakevenOil": 125,
@@ -293,30 +293,32 @@
         "bypassDescription": "Zero bypass \u2014 100% Hormuz dependent"
       },
       "swf": {
-        "totalBn": 17,
+        "totalBn": 17.6,
         "usableShare": 0.05,
         "usableBn": 0.88,
         "note": "No SWF. Received $10bn GCC bailout in 2018 (Saudi $5bn + UAE $5bn).",
         "illiquid": true,
-        "illiquidNote": "Mumtalakat $17bn MOSTLY ILLIQUID. Portfolio concentrated in: Gulf Air (~40% of assets \u2014 loss-making airline, uninvestable), ALBA smelter (force majeure declared), Batelco (telecom). Liquid/realisable portion: ~5% ($0.88bn only). Cannot be quickly monetised under war conditions. Source: Mumtalakat annual report 2025."
+        "illiquidNote": "Mumtalakat $17.6bn MOSTLY ILLIQUID (SWFI 2025). Portfolio concentrated in: Gulf Air (~40% of assets \u2014 loss-making airline, uninvestable), ALBA smelter (force majeure declared), Batelco (telecom). Liquid/realisable portion: ~5% ($0.88bn only). Cannot be quickly monetised under war conditions. Source: Mumtalakat annual report 2025."
       },
       "borrowing": {
-        "preWarSpreadBps": 380,
+        "preWarSpreadBps": 430,
         "warPremiumBps": 200,
-        "allInRate": 9.93,
-        "creditRating": "B+ (S&P)",
+        "allInRate": 10.43,
+        "creditRating": "B (S&P)",
+        "creditRatingNote": "Downgraded B+ \u2192 B by S&P in November 2025 (first downgrade since 2017). Stable outlook reflects expected GCC support. Fitch: negative outlook.",
         "warPremiumByScenario": {
           "A": 100,
           "B": 200,
           "C": 350
         },
         "allInRateByScenario": {
-          "A": 8.93,
-          "B": 9.93,
-          "C": 11.43
+          "A": 9.43,
+          "B": 10.43,
+          "C": 11.93
         }
       },
       "debtGdpPct": 134,
+      "debtGdpNote": "134% = 2024 actual (IMF). Forward projections: 145% (2025), ~150% (2026) per IMF Article IV Jan 2026. Highest debt load in GCC by far.",
       "scenarios": {
         "A": {
           "fiscalBalancePct": -9.7,
@@ -361,17 +363,19 @@
       "color": "#047857",
       "fiscal2025": {
         "oilRevLcu": 590.0,
-        "nonOilRevLcu": 557.0,
+        "nonOilRevLcu": 501.0,
+        "otherRevLcu": 56.0,
         "totalRevLcu": 1147.0,
-        "expenditureLcu": 1312.0,
+        "expenditureLcu": 1313.0,
         "gdpLcu": 4960.0,
-        "source": "Saudi MOF Budget Statement FY2026 (released Dec 2025); oil revenues SAR 590bn, non-oil SAR 557bn, expenditure SAR 1,312bn; oil price assumption ~$72/bbl implied"
+        "source": "Saudi MOF Budget Statement FY2026 (released Dec 2025); oil SAR 590bn, non-oil taxes/fees SAR 501bn, other revenues SAR 56bn, expenditure SAR 1,313bn; oil price assumption ~$72/bbl implied"
       },
       "baseline": {
         "fiscalBalancePct": -3.3,
         "oilRevShare": 51.4,
-        "nonOilRevShare": 48.6,
-        "breakevenOil": 84,
+        "nonOilRevShare": 43.7,
+        "otherRevShare": 4.9,
+        "breakevenOil": 91,
         "riskRating": "Medium"
       },
       "hormuz": {
@@ -389,7 +393,7 @@
         "preWarSpreadBps": 65,
         "warPremiumBps": 25,
         "allInRate": 5.03,
-        "creditRating": "A (S&P)",
+        "creditRating": "A+ (S&P)",
         "warPremiumByScenario": {
           "A": 10,
           "B": 25,
@@ -464,11 +468,11 @@
         "bypassDescription": "1.8 m b/d Abu Dhabi Crude Oil Pipeline to Fujairah. UAE stays in surplus even if Fujairah fully destroyed (+1.6%)."
       },
       "swf": {
-        "totalBn": 1300,
+        "totalBn": 1440,
         "usableShare": 1.0,
-        "usableBn": 1300,
+        "usableBn": 1440,
         "accessNote": "ADIA + Mubadala. Some assets may not be immediately accessible (long-term mandates, illiquid positions).",
-        "note": "ADIA + Mubadala \u2014 largest SWF buffer in GCC. Accessibility varies by asset class."
+        "note": "ADIA (~$1,080bn) + Mubadala ($330-358bn) = ~$1,440bn combined. ADIA crossed $1 trillion mark in 2025. Source: ADIA annual report 2025; Mubadala official AUM $330bn; Global SWF estimates."
       },
       "borrowing": {
         "preWarSpreadBps": 50,
@@ -532,21 +536,21 @@
       "name": "Oman",
       "lcu": "OMR",
       "fxToUsd": 2.6,
-      "gdpUsd": 105,
+      "gdpUsd": 108,
       "color": "#0891B2",
       "fiscal2025": {
         "oilRevLcu": 7.713,
         "nonOilRevLcu": 3.734,
         "totalRevLcu": 11.447,
         "expenditureLcu": 11.977,
-        "gdpLcu": 37.27,
-        "source": "Oman MOF State General Budget 2026 (11th Five-Year Plan); oil price assumption $60/bbl; oil+gas net revenues combined OMR 7.713bn (oil OMR 5.752bn + gas OMR 1.961bn)"
+        "gdpLcu": 41.5,
+        "source": "Oman MOF State General Budget 2026 (11th Five-Year Plan); oil price assumption $60/bbl; oil+gas net revenues OMR 7.713bn (oil OMR 5.752bn + gas OMR 1.961bn). GDP: IMF 2025 = $106.5bn / OMR 41.0bn; 2026 est ~$108bn"
       },
       "baseline": {
         "fiscalBalancePct": -1.3,
         "oilRevShare": 67.4,
         "nonOilRevShare": 32.6,
-        "breakevenOil": 62,
+        "breakevenOil": 68,
         "riskRating": "Beneficiary",
         "dotColor": "gray"
       },
@@ -556,28 +560,29 @@
         "bypassDescription": "Exports via Gulf of Oman \u2014 no Hormuz exposure. Full windfall from oil price spike."
       },
       "swf": {
-        "totalBn": 17,
+        "totalBn": 54,
         "usableShare": 0.6,
-        "usableBn": 10.2,
-        "note": "OIA \u2014 small but accessible. War surplus reduces financing need."
+        "usableBn": 32,
+        "note": "OIA \u2014 OMR 21bn (~$54bn) AUM as of end-2025; now in global top-10 SWFs. Accessible. War surplus reduces financing need. Source: Financial Afrik Jul 2025; Oman Observer 2026 budget press conference."
       },
       "borrowing": {
-        "preWarSpreadBps": 130,
+        "preWarSpreadBps": 90,
         "warPremiumBps": 15,
-        "allInRate": 5.58,
-        "creditRating": "BB+ (S&P)",
+        "allInRate": 5.03,
+        "creditRating": "BBB- (S&P / Fitch / Moody's)",
+        "creditRatingNote": "Investment grade from ALL THREE agencies: S&P BBB- (upgraded Sep 2024), Fitch BBB- (upgraded Dec 2025), Moody's Baa3 (upgraded 2025). Significant credit improvement reflects fiscal consolidation since 2020.",
         "warPremiumByScenario": {
           "A": 8,
           "B": 15,
           "C": 25
         },
         "allInRateByScenario": {
-          "A": 5.51,
-          "B": 5.58,
-          "C": 5.68
+          "A": 5.11,
+          "B": 5.18,
+          "C": 5.28
         }
       },
-      "debtGdpPct": 35,
+      "debtGdpPct": 36,
       "scenarios": {
         "A": {
           "fiscalBalancePct": 1.5,
