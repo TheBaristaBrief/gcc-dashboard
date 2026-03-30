@@ -328,7 +328,8 @@ function CountryBuildYourOwn({ country }) {
     if (i >= 3) {
       oil_chg = (2*(1+0.07)+warMos*(1+byp_f-1+((oilWar-65)/65)*byp_f*cl)+Math.max(0,10-warMos)*(1+0.08)*oilPost/65)/12-1;
     } else {
-      oil_chg = (2*(1+0.05)+warMos*(1-cl)+Math.max(0,10-warMos)*(1+((oilPost-65)/65)))/12-1;
+      // war period: (1-cl) = export volume fraction × oilWar price; post-war: oilPost price
+      oil_chg = (2*(1+0.05)+warMos*(1-cl)*(oilWar/65)+Math.max(0,10-warMos)*(oilPost/65))/12-1;
     }
     const nol_chg   = -(nolPct/100)*warMos/12;
     const spend_chg = imf_sp + (milPct+subPct)/100*warMos/12;
