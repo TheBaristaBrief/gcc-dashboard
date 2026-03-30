@@ -86,6 +86,10 @@ function ScenarioCard({ scenario, isSelected, onClick }) {
     C: { border: isSelected ? "border-red-400 bg-red-50"   : "border-gray-200 hover:border-red-300",   hdr: "text-red-800"   },
   }[scenario.id];
 
+  const reopensDate = new Date();
+  reopensDate.setDate(reopensDate.getDate() + scenario.daysFromToday);
+  const dynamicReopens = "~" + reopensDate.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+
   return (
     <div className={`border-2 rounded-xl p-4 cursor-pointer transition-all ${colorMap.border}`} onClick={onClick}>
       <div className="flex items-start justify-between mb-2">
@@ -95,7 +99,7 @@ function ScenarioCard({ scenario, isSelected, onClick }) {
         </div>
         <div className="text-right">
           <p className="text-xs text-gray-400">Reopens</p>
-          <p className="text-xs font-medium text-gray-600">{scenario.reopens}</p>
+          <p className="text-xs font-medium text-gray-600">{dynamicReopens}</p>
         </div>
       </div>
       <p className="text-xs text-gray-400 mb-3">
