@@ -550,6 +550,33 @@ function CountryDetail({ country }) {
 
   return (
     <div className="space-y-5">
+
+      {/* Latest news strip */}
+      {country.latestNews?.length > 0 && (
+        <div>
+          <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-2">Latest Developments</p>
+          <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
+            {country.latestNews.map((item, i) => (
+              <div key={i} className="min-w-[210px] max-w-[230px] flex-shrink-0 bg-gray-50 border border-gray-200 rounded-lg p-3">
+                <div className="flex items-center gap-1.5 mb-1.5">
+                  <span className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                    item.impact === 'negative' ? 'bg-red-400' :
+                    item.impact === 'positive' ? 'bg-green-400' : 'bg-gray-400'
+                  }`} />
+                  <span className="text-xs text-gray-500 bg-gray-200 px-1.5 py-0.5 rounded font-medium">
+                    {item.tag}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-800 font-medium leading-relaxed mb-1.5 line-clamp-2">
+                  {item.headline}
+                </p>
+                <p className="text-xs text-gray-400">{item.source} · {item.date}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Qatar Ras Laffan alert */}
       {isQatar && (
         <div className="bg-red-50 border border-red-200 rounded-xl p-4">

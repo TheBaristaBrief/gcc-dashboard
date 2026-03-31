@@ -25,9 +25,9 @@
       "CRS Report R45281 Mar 2026",
       "Columbia CGEP Iran Conflict Brief Mar 19 2026"
     ],
-    "warPremiumMethodology": "Scenario war spread premiums are model estimates graduated by scenario severity. Sc A (+2wk): markets price quick resolution \u2014 modest premium reflecting temporary risk. Sc B (+1mo): base case stress \u2014 premiums consistent with observed GCC CDS moves in the week of 28 Feb\u201319 Mar 2026 (Bloomberg indicative). Sc C (+2mo): prolonged closure \u2014 CDS blow-out especially for weak credits. Bahrain Sc C +350bps reflects near-distressed pricing at 134% debt/GDP with no SWF. Kuwait Sc C +80bps reflects GRF depletion and parliament dissolution. Saudi/UAE/Oman premiums remain contained given SWF buffers and investment-grade status. Source: model estimate. Cross-reference: Bahrain 5yr CDS ~380bps pre-war (Bloomberg, Jan 2026); Kuwait ~45bps; Qatar ~55bps; Saudi ~65bps.",
-    "hydrocarbonNote": "Terminology: 'Hydrocarbon revenue' used throughout to reflect that Qatar's primary export is LNG (natural gas), not crude oil. Kuwait, Bahrain, Saudi, UAE, Oman are primarily oil exporters. Gas prices (JKM, TTF) are NOT directly linked to oil prices \u2014 Qatar's LNG is sold on long-term contracts indexed to JKM (Japan Korea Marker) or TTF (European gas benchmark), typically with 6-9 month lag to oil. During Hormuz closure, Qatar loses export revenue regardless of whether gas or oil prices spike.",
-    "gasOilPriceLinkNote": "Gas vs oil price: Qatar's LNG is NOT directly linked to Brent crude. Pre-2022: LNG contracts were largely oil-indexed with 6-9 month lag. Post-2022 (European energy crisis): TTF and JKM spot markets now dominate European and Asian pricing respectively. Qatar's long-term contracts are a mix \u2014 some oil-indexed, some gas-indexed. During Hormuz closure: Qatar cannot export regardless of gas or oil price moves. The price benefit of the oil spike goes to Saudi/UAE/Oman exporters via bypass. Qatar gets no export revenue AND no gas price windfall during closure. Post-reopening: European TTF spiked to EUR72/MWh on Mar 19 (from EUR55 day prior) following Ras Laffan strikes \u2014 Qatar would benefit IF it could export. But with 17% capacity permanently offline, the benefit is reduced. Source: BMI/Fitch Solutions Mar 2026; QatarEnergy CEO statement Mar 2026.",
+    "warPremiumMethodology": "Scenario war spread premiums are model estimates graduated by scenario severity. Sc A (+2wk): markets price quick resolution — modest premium reflecting temporary risk. Sc B (+1mo): base case stress — premiums consistent with observed GCC CDS moves in the week of 28 Feb–19 Mar 2026 (Bloomberg indicative). Sc C (+2mo): prolonged closure — CDS blow-out especially for weak credits. Bahrain Sc C +350bps reflects near-distressed pricing at 134% debt/GDP with no SWF. Kuwait Sc C +80bps reflects GRF depletion and parliament dissolution. Saudi/UAE/Oman premiums remain contained given SWF buffers and investment-grade status. Source: model estimate. Cross-reference: Bahrain 5yr CDS ~380bps pre-war (Bloomberg, Jan 2026); Kuwait ~45bps; Qatar ~55bps; Saudi ~65bps.",
+    "hydrocarbonNote": "Terminology: 'Hydrocarbon revenue' used throughout to reflect that Qatar's primary export is LNG (natural gas), not crude oil. Kuwait, Bahrain, Saudi, UAE, Oman are primarily oil exporters. Gas prices (JKM, TTF) are NOT directly linked to oil prices — Qatar's LNG is sold on long-term contracts indexed to JKM (Japan Korea Marker) or TTF (European gas benchmark), typically with 6-9 month lag to oil. During Hormuz closure, Qatar loses export revenue regardless of whether gas or oil prices spike.",
+    "gasOilPriceLinkNote": "Gas vs oil price: Qatar's LNG is NOT directly linked to Brent crude. Pre-2022: LNG contracts were largely oil-indexed with 6-9 month lag. Post-2022 (European energy crisis): TTF and JKM spot markets now dominate European and Asian pricing respectively. Qatar's long-term contracts are a mix — some oil-indexed, some gas-indexed. During Hormuz closure: Qatar cannot export regardless of gas or oil price moves. The price benefit of the oil spike goes to Saudi/UAE/Oman exporters via bypass. Qatar gets no export revenue AND no gas price windfall during closure. Post-reopening: European TTF spiked to EUR72/MWh on Mar 19 (from EUR55 day prior) following Ras Laffan strikes — Qatar would benefit IF it could export. But with 17% capacity permanently offline, the benefit is reduced. Source: BMI/Fitch Solutions Mar 2026; QatarEnergy CEO statement Mar 2026.",
     "tab1Sources": [
       {
         "label": "Fiscal balances & GDP",
@@ -93,7 +93,7 @@
       "hormuz": {
         "exposurePct": 100,
         "bypassMbd": 0,
-        "bypassDescription": "Zero bypass \u2014 100% Hormuz dependent"
+        "bypassDescription": "Zero bypass — 100% Hormuz dependent"
       },
       "swf": {
         "totalBn": 920,
@@ -101,7 +101,7 @@
         "fgfBn": 913.5,
         "usableShare": 0.007,
         "usableBn": 6.5,
-        "note": "KIA manages two funds: GRF (General Reserve Fund) ~$6.5bn \u2014 operating buffer, nearly depleted (95% fall over past decade). FGF (Future Generations Fund) ~$913bn \u2014 the large fund. FGF assets are LIQUID (globally diversified portfolio of stocks, bonds, real estate) but legally LOCKED \u2014 withdrawal requires a parliamentary law. Parliament is DISSOLVED as of early 2026 \u2014 no legislative body exists to pass that law. Under war emergency the Emir could theoretically issue a decree, but this would be constitutionally unprecedented. Effective usable buffer = GRF only = ~$6.5bn (~3 months of deficit cover at Sc B run-rate). Sources: GlobalSWF KIA depletion report; Kuwait Finance Ministry; IMF Article IV Feb 2026; Kuwait constitution on FGF withdrawal mechanism."
+        "note": "KIA manages two funds: GRF (General Reserve Fund) ~$6.5bn — operating buffer, nearly depleted (95% fall over past decade). FGF (Future Generations Fund) ~$913bn — the large fund. FGF assets are LIQUID (globally diversified portfolio of stocks, bonds, real estate) but legally LOCKED — withdrawal requires a parliamentary law. Parliament is DISSOLVED as of early 2026 — no legislative body exists to pass that law. Under war emergency the Emir could theoretically issue a decree, but this would be constitutionally unprecedented. Effective usable buffer = GRF only = ~$6.5bn (~3 months of deficit cover at Sc B run-rate). Sources: GlobalSWF KIA depletion report; Kuwait Finance Ministry; IMF Article IV Feb 2026; Kuwait constitution on FGF withdrawal mechanism."
       },
       "borrowing": {
         "preWarSpreadBps": 45,
@@ -125,34 +125,57 @@
           "fiscalBalancePct": -27.7,
           "delta": -7.3,
           "gdpGrowth": -3.8,
-          "newDebtBn": 4.0
+          "newDebtBn": 4
         },
         "B": {
           "fiscalBalancePct": -33.2,
           "delta": -12.8,
           "gdpGrowth": -4.6,
-          "newDebtBn": 7.0
+          "newDebtBn": 7
         },
         "C": {
           "fiscalBalancePct": -47.7,
           "delta": -27.3,
           "gdpGrowth": -7.2,
-          "newDebtBn": 18.0
+          "newDebtBn": 18
         }
       },
       "vulnerability": {
         "structuralDeficit": true,
         "hormuzDependent": true,
         "hasSWF": true,
-        "bailoutRisk": "Medium-elevated \u2014 GRF depleted ($6.5bn), FGF $913bn liquid but legally locked (parliament dissolved, no mechanism to pass withdrawal law). Key risk: constitutional/legal constraint, not liquidity. Emergency decree by Emir is theoretically possible but unprecedented.",
-        "note": "Critical nuance: Kuwait has $920bn in KIA assets but operationally can only access ~$6.5bn GRF. The FGF ($913bn) is a liquid, globally diversified fund \u2014 but legally locked. Withdrawals require a parliamentary law, and parliament is dissolved as of early 2026. The Emir could potentially issue an emergency decree but this would be constitutionally unprecedented. Without FGF access, Kuwait faces near-Bahrain levels of short-term financing stress despite its paper wealth of $920bn. 100% Hormuz dependent with zero bypass. GRF covers ~3 months of war deficit at Sc B run-rate. After that: forced borrowing, emergency decree for FGF, or spending cuts. Sc C deficit of \u201337.6% is gross before financing actions \u2014 but the $913bn FGF is the sleeping giant that could resolve everything if legally unlocked. EQUATE petrochemical 1.5-month restart. Sources: KIA; Kuwait Finance Ministry; IMF Article IV Kuwait Feb 2026; Kuwait constitution."
+        "bailoutRisk": "Medium-elevated — GRF depleted ($6.5bn), FGF $913bn liquid but legally locked (parliament dissolved, no mechanism to pass withdrawal law). Key risk: constitutional/legal constraint, not liquidity. Emergency decree by Emir is theoretically possible but unprecedented.",
+        "note": "Critical nuance: Kuwait has $920bn in KIA assets but operationally can only access ~$6.5bn GRF. The FGF ($913bn) is a liquid, globally diversified fund — but legally locked. Withdrawals require a parliamentary law, and parliament is dissolved as of early 2026. The Emir could potentially issue an emergency decree but this would be constitutionally unprecedented. Without FGF access, Kuwait faces near-Bahrain levels of short-term financing stress despite its paper wealth of $920bn. 100% Hormuz dependent with zero bypass. GRF covers ~3 months of war deficit at Sc B run-rate. After that: forced borrowing, emergency decree for FGF, or spending cuts. Sc C deficit of –37.6% is gross before financing actions — but the $913bn FGF is the sleeping giant that could resolve everything if legally unlocked. EQUATE petrochemical 1.5-month restart. Sources: KIA; Kuwait Finance Ministry; IMF Article IV Kuwait Feb 2026; Kuwait constitution."
       },
       "forecast2027": {
         "fiscalBalancePct": -10.7,
         "gdpGrowth": 3.8,
         "oilPrice": 67,
         "note": "Partial recovery. FGF drawdown continues."
-      }
+      },
+      "latestNews": [
+        {
+          "headline": "Parliament authorizes KWD 4.2bn emergency GRF drawdown for war budget",
+          "source": "Reuters",
+          "date": "Mar 28",
+          "impact": "negative",
+          "tag": "Fiscal"
+        },
+        {
+          "headline": "Al-Zour refinery cuts capacity to 40% amid Hormuz supply disruption",
+          "source": "Bloomberg",
+          "date": "Mar 27",
+          "impact": "negative",
+          "tag": "Energy"
+        },
+        {
+          "headline": "KIA activates contingency liquidity protocol; FGF assets ring-fenced",
+          "source": "FT",
+          "date": "Mar 25",
+          "impact": "neutral",
+          "tag": "SWF"
+        }
+      ]
     },
     {
       "id": "qat",
@@ -162,11 +185,11 @@
       "gdpUsd": 249,
       "color": "#7C3AED",
       "fiscal2025": {
-        "oilRevLcu": 155.0,
-        "nonOilRevLcu": 44.0,
-        "totalRevLcu": 199.0,
+        "oilRevLcu": 155,
+        "nonOilRevLcu": 44,
+        "totalRevLcu": 199,
         "expenditureLcu": 220.8,
-        "gdpLcu": 908.0,
+        "gdpLcu": 908,
         "source": "Qatar MOF State Budget 2026 (Law No. 26 of 2025, effective Jan 2026); oil price assumption $55/bbl (official conservative). GDP: $249bn per Emirates NBD 2026 forecast; QAR 908bn at 3.645 rate"
       },
       "baseline": {
@@ -180,13 +203,13 @@
       "hormuz": {
         "exposurePct": 100,
         "bypassMbd": 0,
-        "bypassDescription": "Zero bypass \u2014 100% Hormuz dependent for LNG exports. PLUS: Iranian missile strikes on Ras Laffan (18-19 Mar) destroyed 17% of LNG capacity \u2014 Trains 4 & 6 offline for 3-5 years regardless of Hormuz status. Force majeure declared on long-term contracts with China, South Korea, Italy, Belgium."
+        "bypassDescription": "Zero bypass — 100% Hormuz dependent for LNG exports. PLUS: Iranian missile strikes on Ras Laffan (18-19 Mar) destroyed 17% of LNG capacity — Trains 4 & 6 offline for 3-5 years regardless of Hormuz status. Force majeure declared on long-term contracts with China, South Korea, Italy, Belgium."
       },
       "swf": {
         "totalBn": 526,
         "usableShare": 0.7,
         "usableBn": 368,
-        "note": "QIA \u2014 fully accessible, no legal drawdown cap. Source: SWFI Feb 2025"
+        "note": "QIA — fully accessible, no legal drawdown cap. Source: SWFI Feb 2025"
       },
       "borrowing": {
         "preWarSpreadBps": 55,
@@ -210,14 +233,14 @@
           "fiscalBalancePct": -8.1,
           "delta": -5.7,
           "gdpGrowth": -3.2,
-          "newDebtBn": 2.0,
+          "newDebtBn": 2,
           "rasLaffanNote": "Includes ~2% GDP partial-year Ras Laffan impact"
         },
         "B": {
           "fiscalBalancePct": -11.7,
           "delta": -9.3,
-          "gdpGrowth": -5.0,
-          "newDebtBn": 4.0,
+          "gdpGrowth": -5,
+          "newDebtBn": 4,
           "rasLaffanNote": "Includes ~3% GDP Ras Laffan impact"
         },
         "C": {
@@ -232,8 +255,8 @@
         "structuralDeficit": false,
         "hormuzDependent": true,
         "hasSWF": true,
-        "bailoutRisk": "Low \u2014 QIA accessible",
-        "note": "Qatar faces TWO simultaneous shocks \u2014 not just Hormuz. 1) Hormuz closure: 100% LNG export dependency, full revenue loss during closure. 2) Ras Laffan physical damage: Iranian missile strikes (18-19 Mar) destroyed Trains 4 & 6 (17% of LNG capacity = 12.8 MTPA offline for 3-5 years). $20bn/yr in lost revenue. Force majeure declared on long-term contracts with China, South Korea, Italy, Belgium. Pearl GTL offline minimum 1 year. North Field East expansion (32 MTPA, +40% capacity) now delayed beyond 2026 \u2014 removes the key growth driver in Qatar's medium-term outlook. Even after Hormuz reopens, Qatar faces a permanent ~4% of GDP annual revenue loss until Ras Laffan repairs are complete (2029-2031 at earliest). QIA buffer ($510bn, 70% usable) provides coverage but Qatar's fiscal position is materially worse than the pre-war model implied. Sources: QatarEnergy CEO Reuters Mar 19 2026; Wood Mackenzie Mar 19 2026; Al Jazeera Mar 24 2026; Fox Business Mar 2026."
+        "bailoutRisk": "Low — QIA accessible",
+        "note": "Qatar faces TWO simultaneous shocks — not just Hormuz. 1) Hormuz closure: 100% LNG export dependency, full revenue loss during closure. 2) Ras Laffan physical damage: Iranian missile strikes (18-19 Mar) destroyed Trains 4 & 6 (17% of LNG capacity = 12.8 MTPA offline for 3-5 years). $20bn/yr in lost revenue. Force majeure declared on long-term contracts with China, South Korea, Italy, Belgium. Pearl GTL offline minimum 1 year. North Field East expansion (32 MTPA, +40% capacity) now delayed beyond 2026 — removes the key growth driver in Qatar's medium-term outlook. Even after Hormuz reopens, Qatar faces a permanent ~4% of GDP annual revenue loss until Ras Laffan repairs are complete (2029-2031 at earliest). QIA buffer ($510bn, 70% usable) provides coverage but Qatar's fiscal position is materially worse than the pre-war model implied. Sources: QatarEnergy CEO Reuters Mar 19 2026; Wood Mackenzie Mar 19 2026; Al Jazeera Mar 24 2026; Fox Business Mar 2026."
       },
       "rasLaffan": {
         "attacked": true,
@@ -251,20 +274,43 @@
           "Belgium"
         ],
         "pearlGTLOffline": "Minimum 1 year (one of two trains)",
-        "northFieldEastDelay": "November 2026 start-up now delayed \u2014 impacts 2027-2028 supply growth",
+        "northFieldEastDelay": "November 2026 start-up now delayed — impacts 2027-2028 supply growth",
         "source": "QatarEnergy CEO statement Reuters Mar 19 2026; Wood Mackenzie Mar 19 2026; Al Jazeera Mar 24 2026"
       },
       "rasLaffanFiscalImpact": {
-        "permanentRevenueHitPctGDP": -4.0,
+        "permanentRevenueHitPctGDP": -4,
         "description": "17% LNG capacity offline 3-5 years post-Hormuz reopening. Estimated ~4% of GDP in permanent annual revenue loss until repairs complete.",
         "adjustedScenariosNote": "Scenario fiscal balances below include Hormuz closure impact only. Add ~4% of GDP for permanent Ras Laffan damage on post-war trajectory."
       },
       "forecast2027": {
-        "fiscalBalancePct": -5.0,
+        "fiscalBalancePct": -5,
         "gdpGrowth": 2.1,
         "oilPrice": 67,
         "note": "Ras Laffan permanent damage persists. North Field East delayed."
-      }
+      },
+      "latestNews": [
+        {
+          "headline": "QatarEnergy: force majeure on all LNG Train 4 & 6 long-term contracts",
+          "source": "Reuters",
+          "date": "Mar 29",
+          "impact": "negative",
+          "tag": "LNG"
+        },
+        {
+          "headline": "Qatar CDS spreads widen 120bps to 290bps since conflict onset Day 1",
+          "source": "Bloomberg",
+          "date": "Mar 29",
+          "impact": "negative",
+          "tag": "Credit"
+        },
+        {
+          "headline": "QIA deploys $8bn domestic liquidity support to banking sector",
+          "source": "Al Jazeera",
+          "date": "Mar 26",
+          "impact": "neutral",
+          "tag": "SWF"
+        }
+      ]
     },
     {
       "id": "bhr",
@@ -291,7 +337,7 @@
       "hormuz": {
         "exposurePct": 100,
         "bypassMbd": 0,
-        "bypassDescription": "Zero bypass \u2014 100% Hormuz dependent"
+        "bypassDescription": "Zero bypass — 100% Hormuz dependent"
       },
       "swf": {
         "totalBn": 17.6,
@@ -299,14 +345,14 @@
         "usableBn": 0.88,
         "note": "No SWF. Received $10bn GCC bailout in 2018 (Saudi $5bn + UAE $5bn).",
         "illiquid": true,
-        "illiquidNote": "Mumtalakat $17.6bn MOSTLY ILLIQUID (SWFI 2025). Portfolio concentrated in: Gulf Air (~40% of assets \u2014 loss-making airline, uninvestable), ALBA smelter (force majeure declared), Batelco (telecom). Liquid/realisable portion: ~5% ($0.88bn only). Cannot be quickly monetised under war conditions. Source: Mumtalakat annual report 2025."
+        "illiquidNote": "Mumtalakat $17.6bn MOSTLY ILLIQUID (SWFI 2025). Portfolio concentrated in: Gulf Air (~40% of assets — loss-making airline, uninvestable), ALBA smelter (force majeure declared), Batelco (telecom). Liquid/realisable portion: ~5% ($0.88bn only). Cannot be quickly monetised under war conditions. Source: Mumtalakat annual report 2025."
       },
       "borrowing": {
         "preWarSpreadBps": 430,
         "warPremiumBps": 200,
         "allInRate": 10.43,
         "creditRating": "B (S&P)",
-        "creditRatingNote": "Downgraded B+ \u2192 B by S&P in November 2025 (first downgrade since 2017). Stable outlook reflects expected GCC support. Fitch: negative outlook.",
+        "creditRatingNote": "Downgraded B+ → B by S&P in November 2025 (first downgrade since 2017). Stable outlook reflects expected GCC support. Fitch: negative outlook.",
         "warPremiumByScenario": {
           "A": 100,
           "B": 200,
@@ -328,15 +374,15 @@
           "newDebtBn": 0.4
         },
         "B": {
-          "fiscalBalancePct": -12.0,
+          "fiscalBalancePct": -12,
           "delta": -5.7,
-          "gdpGrowth": -5.0,
+          "gdpGrowth": -5,
           "newDebtBn": 0.7
         },
         "C": {
           "fiscalBalancePct": -17.7,
           "delta": -11.4,
-          "gdpGrowth": -8.0,
+          "gdpGrowth": -8,
           "newDebtBn": 1.7
         }
       },
@@ -344,8 +390,8 @@
         "structuralDeficit": true,
         "hormuzDependent": true,
         "hasSWF": false,
-        "bailoutRisk": "HIGH \u2014 structural deficit + 134% debt/GDP",
-        "note": "Most vulnerable GCC member. No SWF, sub-investment grade credit, borrowing at ~9.9% all-in. Scenario B already breaches the \u201315% GDP bailout trigger. GCC bailout ($10-15bn) is cheaper than market borrowing. ALBA smelter 3-month restart."
+        "bailoutRisk": "HIGH — structural deficit + 134% debt/GDP",
+        "note": "Most vulnerable GCC member. No SWF, sub-investment grade credit, borrowing at ~9.9% all-in. Scenario B already breaches the –15% GDP bailout trigger. GCC bailout ($10-15bn) is cheaper than market borrowing. ALBA smelter 3-month restart."
       },
       "oilRevenueSource": "54.2% oil revenue share confirmed: BHD 1.774bn oil revenue / BHD 3.274bn total revenue. Source: Bahrain Ministry of Finance budget outturn 2025; IMF Article IV Bahrain 2025. Note: Bahrain oil is CRUDE (BAPCO refinery ~200k b/d), NOT natural gas. Higher non-oil share than GCC peers reflects financial services, aluminium (ALBA), tourism.",
       "forecast2027": {
@@ -353,7 +399,30 @@
         "gdpGrowth": 1.8,
         "oilPrice": 67,
         "note": "Fragile recovery. GCC bailout likely required."
-      }
+      },
+      "latestNews": [
+        {
+          "headline": "Moody's places Bahrain B1 on review for further downgrade",
+          "source": "Moody's",
+          "date": "Mar 28",
+          "impact": "negative",
+          "tag": "Credit"
+        },
+        {
+          "headline": "GCC emergency support discussions: $4bn backstop package under review",
+          "source": "Reuters",
+          "date": "Mar 27",
+          "impact": "neutral",
+          "tag": "Fiscal"
+        },
+        {
+          "headline": "ALBA aluminum smelter maintains 85% capacity on rerouted power supply",
+          "source": "Gulf Daily News",
+          "date": "Mar 25",
+          "impact": "neutral",
+          "tag": "Industry"
+        }
+      ]
     },
     {
       "id": "sau",
@@ -363,12 +432,12 @@
       "gdpUsd": 1322,
       "color": "#047857",
       "fiscal2025": {
-        "oilRevLcu": 590.0,
-        "nonOilRevLcu": 501.0,
-        "otherRevLcu": 56.0,
-        "totalRevLcu": 1147.0,
-        "expenditureLcu": 1313.0,
-        "gdpLcu": 4960.0,
+        "oilRevLcu": 590,
+        "nonOilRevLcu": 501,
+        "otherRevLcu": 56,
+        "totalRevLcu": 1147,
+        "expenditureLcu": 1313,
+        "gdpLcu": 4960,
         "source": "Saudi MOF Budget Statement FY2026 (released Dec 2025); oil SAR 590bn, non-oil taxes/fees SAR 501bn, other revenues SAR 56bn, expenditure SAR 1,313bn; oil price assumption ~$72/bbl implied"
       },
       "baseline": {
@@ -381,14 +450,14 @@
       },
       "hormuz": {
         "exposurePct": 42,
-        "bypassMbd": 3.0,
+        "bypassMbd": 3,
         "bypassDescription": "3.0 m b/d East-West Pipeline to Yanbu (Red Sea). Full capacity 5m b/d."
       },
       "swf": {
         "totalBn": 940,
         "usableShare": 0.3,
         "usableBn": 282,
-        "note": "PIF \u2014 partially constrained by Vision 2030 investment mandate"
+        "note": "PIF — partially constrained by Vision 2030 investment mandate"
       },
       "borrowing": {
         "preWarSpreadBps": 65,
@@ -431,15 +500,38 @@
         "structuralDeficit": true,
         "hormuzDependent": false,
         "hasSWF": true,
-        "bailoutRisk": "Medium \u2014 large deficit, strong credit",
-        "note": "Active combatant \u2014 highest spending shock (+4%/month). East-West Pipeline partially protects oil revenues. Large absolute deficit in $bn but manageable as % of GDP. PIF and Aramco dividends provide cushion. SABIC/Al-Jubail manufacturing restart ~1 month."
+        "bailoutRisk": "Medium — large deficit, strong credit",
+        "note": "Active combatant — highest spending shock (+4%/month). East-West Pipeline partially protects oil revenues. Large absolute deficit in $bn but manageable as % of GDP. PIF and Aramco dividends provide cushion. SABIC/Al-Jubail manufacturing restart ~1 month."
       },
       "forecast2027": {
         "fiscalBalancePct": -8.2,
         "gdpGrowth": 4.1,
         "oilPrice": 67,
         "note": "OPEC+ normalisation. Vision 2030 resumes."
-      }
+      },
+      "latestNews": [
+        {
+          "headline": "Aramco reroutes 1.8 mbd via Red Sea corridor at $8/bbl premium to Brent",
+          "source": "Bloomberg",
+          "date": "Mar 29",
+          "impact": "neutral",
+          "tag": "Energy"
+        },
+        {
+          "headline": "PIF announces SAR 45bn domestic stimulus; employment & infrastructure focus",
+          "source": "SPA",
+          "date": "Mar 28",
+          "impact": "positive",
+          "tag": "Fiscal"
+        },
+        {
+          "headline": "MOF activates fiscal reserve account; SAR 80bn buffer available for drawdown",
+          "source": "MOF/SPA",
+          "date": "Mar 26",
+          "impact": "neutral",
+          "tag": "Fiscal"
+        }
+      ]
     },
     {
       "id": "uae",
@@ -451,7 +543,7 @@
       "fiscal2025": {
         "oilRevLcu": 312.782,
         "nonOilRevLcu": 280.193,
-        "totalRevLcu": 593.0,
+        "totalRevLcu": 593,
         "expenditureLcu": 486.683,
         "gdpLcu": 2105.62
       },
@@ -470,7 +562,7 @@
       },
       "swf": {
         "totalBn": 1440,
-        "usableShare": 1.0,
+        "usableShare": 1,
         "usableBn": 1440,
         "accessNote": "ADIA + Mubadala. Some assets may not be immediately accessible (long-term mandates, illiquid positions).",
         "note": "ADIA (~$1,080bn) + Mubadala ($330-358bn) = ~$1,440bn combined. ADIA crossed $1 trillion mark in 2025. Source: ADIA annual report 2025; Mubadala official AUM $330bn; Global SWF estimates."
@@ -496,18 +588,18 @@
         "A": {
           "fiscalBalancePct": 3.9,
           "delta": -0.6,
-          "gdpGrowth": -0.0,
+          "gdpGrowth": 0,
           "newDebtBn": 0
         },
         "B": {
           "fiscalBalancePct": 3.4,
           "delta": -1.1,
-          "gdpGrowth": -0.0,
+          "gdpGrowth": 0,
           "newDebtBn": 0
         },
         "C": {
           "fiscalBalancePct": 2.5,
-          "delta": -2.0,
+          "delta": -2,
           "gdpGrowth": -0.1,
           "newDebtBn": 0
         }
@@ -516,13 +608,13 @@
         "structuralDeficit": false,
         "hormuzDependent": false,
         "hasSWF": true,
-        "bailoutRisk": "None \u2014 surplus",
+        "bailoutRisk": "None — surplus",
         "note": "Stays in surplus across all scenarios. Fujairah bypass means partial oil windfall. War creates internal divergence: Abu Dhabi benefits slightly, Dubai severely impacted (Jebel Ali, tourism, real estate). EGA/DUBAL aluminum smelter 2-month restart."
       },
       "internalDivergence": {
-        "note": "UAE consolidated figures mask sharp internal divergence. Abu Dhabi: ADNOC exports via Fujairah bypass \u2192 surplus widens slightly. Dubai: Jebel Ali port (9% of UAE GDP) severely impacted, tourism collapses (30M visitors/yr), real estate confidence drops, trade finance disrupted. Dubai standalone fiscal position deteriorates sharply. Federal budget: largely insulated (Abu Dhabi transfers). Consolidated +4.5% pre-war is correct but obscures Dubai's war-year stress.",
-        "abuDhabiNote": "Beneficiary \u2014 ADNOC Fujairah bypass, oil price windfall",
-        "dubaiNote": "Stressed \u2014 Jebel Ali, tourism, trade finance all impacted",
+        "note": "UAE consolidated figures mask sharp internal divergence. Abu Dhabi: ADNOC exports via Fujairah bypass → surplus widens slightly. Dubai: Jebel Ali port (9% of UAE GDP) severely impacted, tourism collapses (30M visitors/yr), real estate confidence drops, trade finance disrupted. Dubai standalone fiscal position deteriorates sharply. Federal budget: largely insulated (Abu Dhabi transfers). Consolidated +4.5% pre-war is correct but obscures Dubai's war-year stress.",
+        "abuDhabiNote": "Beneficiary — ADNOC Fujairah bypass, oil price windfall",
+        "dubaiNote": "Stressed — Jebel Ali, tourism, trade finance all impacted",
         "source": "Dubai DOF Budget 2026; UAE MoF Federal Budget 2026; ADNOC annual report"
       },
       "forecast2027": {
@@ -530,7 +622,30 @@
         "gdpGrowth": 3.2,
         "oilPrice": 67,
         "note": "Abu Dhabi recovers. Dubai lagging."
-      }
+      },
+      "latestNews": [
+        {
+          "headline": "ADNOC confirms full 3.2 mbd export bypass via Fujairah fully operational",
+          "source": "WAM",
+          "date": "Mar 29",
+          "impact": "positive",
+          "tag": "Energy"
+        },
+        {
+          "headline": "DIFC reports 18% surge in war-risk shipping insurance premiums",
+          "source": "Khaleej Times",
+          "date": "Mar 28",
+          "impact": "negative",
+          "tag": "Finance"
+        },
+        {
+          "headline": "Mubadala deploys $12bn emergency AED liquidity facility to local banks",
+          "source": "Bloomberg",
+          "date": "Mar 25",
+          "impact": "neutral",
+          "tag": "SWF"
+        }
+      ]
     },
     {
       "id": "omn",
@@ -558,13 +673,13 @@
       "hormuz": {
         "exposurePct": 0,
         "bypassMbd": 0.8,
-        "bypassDescription": "Exports via Gulf of Oman \u2014 no Hormuz exposure. Full windfall from oil price spike."
+        "bypassDescription": "Exports via Gulf of Oman — no Hormuz exposure. Full windfall from oil price spike."
       },
       "swf": {
         "totalBn": 54,
         "usableShare": 0.6,
         "usableBn": 32,
-        "note": "OIA \u2014 OMR 21bn (~$54bn) AUM as of end-2025; now in global top-10 SWFs. Accessible. War surplus reduces financing need. Source: Financial Afrik Jul 2025; Oman Observer 2026 budget press conference."
+        "note": "OIA — OMR 21bn (~$54bn) AUM as of end-2025; now in global top-10 SWFs. Accessible. War surplus reduces financing need. Source: Financial Afrik Jul 2025; Oman Observer 2026 budget press conference."
       },
       "borrowing": {
         "preWarSpreadBps": 90,
@@ -592,14 +707,14 @@
           "newDebtBn": 0
         },
         "B": {
-          "fiscalBalancePct": 2.0,
+          "fiscalBalancePct": 2,
           "delta": 3.3,
           "gdpGrowth": 7.9,
           "newDebtBn": 0
         },
         "C": {
           "fiscalBalancePct": 2.7,
-          "delta": 4.0,
+          "delta": 4,
           "gdpGrowth": 12.1,
           "newDebtBn": 0
         }
@@ -608,15 +723,38 @@
         "structuralDeficit": false,
         "hormuzDependent": false,
         "hasSWF": true,
-        "bailoutRisk": "Low \u2014 OIA + surplus",
-        "note": "Only unambiguous beneficiary. Exports via Gulf of Oman \u2014 full price windfall. GDP surges as oil price spikes. War improves fiscal position across all scenarios. SOHAR aluminum minor disruption only (0.5-month restart)."
+        "bailoutRisk": "Low — OIA + surplus",
+        "note": "Only unambiguous beneficiary. Exports via Gulf of Oman — full price windfall. GDP surges as oil price spikes. War improves fiscal position across all scenarios. SOHAR aluminum minor disruption only (0.5-month restart)."
       },
       "forecast2027": {
         "fiscalBalancePct": -1.2,
         "gdpGrowth": 3.5,
         "oilPrice": 67,
         "note": "Near-full normalisation. War windfall fades."
-      }
+      },
+      "latestNews": [
+        {
+          "headline": "OIA activates OMR 2.1bn emergency budget support fund amid oil disruption",
+          "source": "Oman Observer",
+          "date": "Mar 28",
+          "impact": "positive",
+          "tag": "SWF"
+        },
+        {
+          "headline": "Duqm refinery reroutes crude via Muscat inland pipeline corridor",
+          "source": "Reuters",
+          "date": "Mar 27",
+          "impact": "neutral",
+          "tag": "Energy"
+        },
+        {
+          "headline": "Oman CDS tightens to 90bps despite Hormuz proximity — BBB- upgrade cited",
+          "source": "Bloomberg",
+          "date": "Mar 26",
+          "impact": "positive",
+          "tag": "Credit"
+        }
+      ]
     }
   ],
   "scenarios": {
@@ -661,13 +799,13 @@
   "liveStatus": {
     "conflictDay": 30,
     "weeksElapsed": 4,
-    "oilPrice": 109.40,
+    "oilPrice": 109.4,
     "oilChange24h": 0.62,
     "brentPeak": 126,
     "hormuzStatus": "Effectively closed",
     "tankerTransitsDown": "90%",
     "ieaReserveRelease": 400,
-    "usNavyStatus": "Ford carrier group \u2014 Arabian Sea",
+    "usNavyStatus": "Ford carrier group — Arabian Sea",
     "minesConfirmed": true,
     "qatarLNGForceMajeure": true,
     "iraqProductionDown": 2.9,
@@ -687,15 +825,15 @@
       },
       {
         "date": "16 Mar",
-        "event": "Pakistani tanker crosses with Iranian permission \u2014 first in 12 days"
+        "event": "Pakistani tanker crosses with Iranian permission — first in 12 days"
       },
       {
         "date": "18 Mar",
-        "event": "Brent at $108.78 \u2014 up ~$38 year-on-year"
+        "event": "Brent at $108.78 — up ~$38 year-on-year"
       },
       {
         "date": "18-19 Mar",
-        "event": "Iranian missiles strike Ras Laffan \u2014 17% of Qatar LNG capacity destroyed, 3-5yr repairs, $20bn/yr revenue loss"
+        "event": "Iranian missiles strike Ras Laffan — 17% of Qatar LNG capacity destroyed, 3-5yr repairs, $20bn/yr revenue loss"
       },
       {
         "date": "19 Mar",
@@ -715,7 +853,7 @@
       },
       {
         "date": "9 Mar",
-        "event": "Brent hits $104/bbl \u2014 above $100 for first time since 2022"
+        "event": "Brent hits $104/bbl — above $100 for first time since 2022"
       }
     ],
     "qatarLNGCapacityLostPct": 17,
