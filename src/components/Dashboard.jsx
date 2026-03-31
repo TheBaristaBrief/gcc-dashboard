@@ -60,6 +60,12 @@ export default function Dashboard() {
             UAE consolidated (Abu Dhabi + Dubai + Federal). Scenario deficits gross before financing.
             Hydrocarbon revenue used throughout — Qatar exports LNG (gas), not crude oil.
           </p>
+          <p className="text-xs text-gray-400 mt-3">
+            Built by <span className="text-gray-500 font-medium">Vincent K.</span> ·{" "}
+            <a href="mailto:Vincent.khoury@oliverwyman.com" className="text-gray-500 hover:text-gray-700 transition-colors">
+              Vincent.khoury@oliverwyman.com
+            </a>
+          </p>
         </div>
       </div>
     </div>

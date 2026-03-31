@@ -73,6 +73,12 @@ export default function PasswordGate({ children }) {
         <p className="text-center text-gray-600 text-xs mt-6">
           Restricted access · For authorised users only
         </p>
+        <p className="text-center text-gray-500 text-xs mt-2">
+          Built by <span className="text-gray-400 font-medium">Vincent K.</span> ·{" "}
+          <a href="mailto:Vincent.khoury@oliverwyman.com" className="text-gray-400 hover:text-gray-300 transition-colors">
+            Vincent.khoury@oliverwyman.com
+          </a>
+        </p>
       </div>
     </div>
   );
