@@ -757,7 +757,7 @@ export default function Tab3_Countries() {
           );
         })}
       </div>
-      {country && <CountryDetail country={country} />}
+      {country && <CountryDetail key={country.id} country={country} />}
     </div>
   );
 }
