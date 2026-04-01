@@ -4,8 +4,8 @@ import data from "../data/gcc-model.json";
 const COUNTRIES = data.countries;
 const SCENARIOS = data.scenarios;
 const LIVE      = data.liveStatus;
-const GDP_USD   = { kwt:146, qat:193, bhr:45, sau:1274, uae:564, omn:105 };
-const EXP_USD   = { kwt:79.84, qat:55.14, bhr:14.25, sau:370.14, uae:132.47, omn:31.82 };
+const GDP_USD   = { kwt:146, qat:249, bhr:47, sau:1322, uae:564, omn:108 };
+const EXP_USD   = { kwt:85.1, qat:60.5, bhr:12.0, sau:350.6, uae:132.4, omn:31.1 };
 const DEBT_CEIL = { kwt:3.0, qat:2.0, bhr:8.0, sau:2.5, uae:0, omn:0 };
 
 const fmtPct  = (v) => (v >= 0 ? "+" : "") + v.toFixed(1) + "%";
@@ -348,7 +348,7 @@ function CountryBuildYourOwn({ country }) {
       oil_chg = (2*(1+0.05)+warMos*(1-cl)*(oilWar/65)+Math.max(0,10-warMos)*(oilPost/65))/12-1;
     }
     const nol_chg   = -(nolPct/100)*warMos/12;
-    const spend_chg = imf_sp + (milPct+subPct)/100*warMos/12;
+    const spend_chg = (milPct+subPct)/100*warMos/12; // exp_25 is already the 2026 MOF budget — no growth factor needed
     const rev26 = oil_25*(1+oil_chg) + nol_25*(1+nol_chg);
     const exp26 = exp_25*(1+spend_chg);
     const gdp_chg = oil_sh*oil_chg + mfg_sh*(mfg_shk*warMos/12) + oth_sh*(oth_shk*warMos/12);
