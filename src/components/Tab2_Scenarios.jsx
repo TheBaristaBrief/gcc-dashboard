@@ -4,7 +4,10 @@ import data from "../data/gcc-model.json";
 const COUNTRIES = data.countries;
 const SCENARIOS = data.scenarios;
 const LIVE = data.liveStatus;
-const FLAGS = { kwt:"🇰🇼", qat:"🇶🇦", bhr:"🇧🇭", sau:"🇸🇦", uae:"🇦🇪", omn:"🇴🇲" };
+const ISO = { kwt:"kw", qat:"qa", bhr:"bh", sau:"sa", uae:"ae", omn:"om" };
+const Flag = ({ id, size=16 }) => (
+  <img src={`https://flagcdn.com/w40/${ISO[id]}.png`} width={size} alt={id} className="rounded-sm inline-block flex-shrink-0" />
+);
 
 const GDP_USD = { kwt:146, qat:193, bhr:45, sau:1274, uae:564, omn:105 };
 const fmtPct = (v) => (v >= 0 ? "+" : "") + v.toFixed(1) + "%";
@@ -114,7 +117,7 @@ function ScenarioCard({ scenario, isSelected, onClick }) {
           return (
             <div key={c.id}>
               <div className="flex justify-between text-xs mb-0.5">
-                <span className="text-gray-500 w-24 flex items-center gap-1"><span>{FLAGS[c.id]}</span>{c.name}</span>
+                <span className="text-gray-500 w-24 flex items-center gap-1"><Flag id={c.id} size={14} />{c.name}</span>
                 <span className={`font-medium ${s.delta > 0 ? "text-green-600" : "text-red-500"}`}>
                   {fmtPct(s.delta)}
                 </span>

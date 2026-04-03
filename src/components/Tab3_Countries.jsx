@@ -4,7 +4,10 @@ import data from "../data/gcc-model.json";
 const COUNTRIES = data.countries;
 const SCENARIOS = data.scenarios;
 const LIVE      = data.liveStatus;
-const FLAGS     = { kwt:"🇰🇼", qat:"🇶🇦", bhr:"🇧🇭", sau:"🇸🇦", uae:"🇦🇪", omn:"🇴🇲" };
+const ISO   = { kwt:"kw", qat:"qa", bhr:"bh", sau:"sa", uae:"ae", omn:"om" };
+const Flag  = ({ id, size=20 }) => (
+  <img src={`https://flagcdn.com/w40/${ISO[id]}.png`} width={size} alt={id} className="rounded-sm inline-block flex-shrink-0" />
+);
 const GDP_USD   = { kwt:146, qat:249, bhr:47, sau:1322, uae:564, omn:108 };
 
 // Dynamic war timing — auto-updates daily
@@ -560,7 +563,7 @@ function CountryDetail({ country }) {
 
       {/* Country header */}
       <div className={`flex items-center gap-3 pb-4 border-b border-gray-100 border-l-4 pl-4 ${borderColor}`}>
-        <span className="text-4xl leading-none">{FLAGS[country.id]}</span>
+        <Flag id={country.id} size={36} />
         <div>
           <h2 className="text-xl font-bold text-gray-900">{country.name}</h2>
           <p className="text-xs text-gray-400 mt-0.5">
@@ -773,7 +776,7 @@ export default function Tab3_Countries() {
               className={`flex items-center gap-2 px-4 py-2.5 text-sm border-b-2 transition-all -mb-px ${
                 isActive ? "border-gray-800 text-gray-900 font-medium" : "border-transparent text-gray-500 hover:text-gray-700"
               }`}>
-              <span className="text-lg leading-none">{FLAGS[c.id]}</span>
+              <Flag id={c.id} size={20} />
               {c.name}
             </button>
           );

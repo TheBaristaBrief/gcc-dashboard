@@ -3,7 +3,10 @@ import data from "../data/gcc-model.json";
 
 const COUNTRIES = data.countries;
 
-const FLAGS = { kwt:"🇰🇼", qat:"🇶🇦", bhr:"🇧🇭", sau:"🇸🇦", uae:"🇦🇪", omn:"🇴🇲" };
+const ISO = { kwt:"kw", qat:"qa", bhr:"bh", sau:"sa", uae:"ae", omn:"om" };
+const Flag = ({ id, size=20 }) => (
+  <img src={`https://flagcdn.com/w40/${ISO[id]}.png`} width={size} alt={id} className="rounded-sm inline-block flex-shrink-0" />
+);
 
 function KpiCard({ country }) {
   const bal = country.baseline.fiscalBalancePct;
@@ -16,7 +19,7 @@ function KpiCard({ country }) {
   return (
     <div className={`bg-white border border-gray-200 border-l-4 ${borderColor} rounded-lg p-3 shadow-sm`}>
       <div className="flex items-center gap-1.5 mb-2">
-        <span className="text-lg leading-none">{FLAGS[country.id]}</span>
+        <Flag id={country.id} size={20} />
         <p className="text-xs font-medium text-gray-600">{country.name}</p>
       </div>
       <p className={`text-2xl font-bold tabular-nums leading-none mb-1 ${colorClass}`}>
@@ -96,7 +99,7 @@ function BreakevenCard({ country }) {
   return (
     <div className="bg-gray-50 rounded-lg p-3">
       <div className="flex items-center gap-1.5 mb-1">
-        <span className="text-base leading-none">{FLAGS[country.id]}</span>
+        <Flag id={country.id} size={18} />
         <p className="text-xs text-gray-500">{country.name}</p>
       </div>
       <p className={`text-xl font-semibold leading-none mb-1 tabular-nums ${isGood ? "text-green-700" : gap < 20 ? "text-amber-700" : "text-red-700"}`}>
@@ -136,7 +139,7 @@ function SWFCard({ country }) {
   return (
     <div className="bg-gray-50 rounded-lg p-3">
       <div className="flex items-center gap-1.5 mb-1">
-        <span className="text-base leading-none">{FLAGS[country.id]}</span>
+        <Flag id={country.id} size={18} />
         <p className="text-xs text-gray-500">{country.name}</p>
       </div>
       <p className="text-xs text-gray-400 mb-0.5">{isKuwait ? "Future Generations Fund (FGF)" : "SWF"}</p>
@@ -208,7 +211,7 @@ export default function Tab1_Overview() {
               <div>
                 <div className="flex justify-between items-center mb-1">
                   <span className="text-xs text-gray-600 font-medium flex items-center gap-1.5">
-                    <span>{FLAGS[c.id]}</span>{c.name}
+                    <Flag id={c.id} size={16} />{c.name}
                   </span>
                   <div className="flex items-center gap-1.5">
                     {isGas && <span className="text-xs bg-amber-100 text-amber-700 px-1 py-0.5 rounded">LNG/Gas</span>}
@@ -224,7 +227,7 @@ export default function Tab1_Overview() {
               <div>
                 <div className="flex justify-between items-center mb-1">
                   <span className="text-xs text-gray-600 font-medium flex items-center gap-1.5">
-                    <span>{FLAGS[c.id]}</span>{c.name}
+                    <Flag id={c.id} size={16} />{c.name}
                   </span>
                   <span className={`text-xs font-semibold ${isFree ? "text-green-600" : exp === 100 ? "text-red-600" : "text-amber-600"}`}>
                     {isFree ? "Hormuz-free" : `${exp}% exposed`}
@@ -293,7 +296,7 @@ export default function Tab1_Overview() {
                 <tr key={c.id} className="border-b border-gray-100 last:border-0">
                   <td className="py-2 font-medium text-gray-700">
                     <span className="flex items-center gap-1.5">
-                      <span className="text-base leading-none">{FLAGS[c.id]}</span>{c.name}
+                      <Flag id={c.id} size={18} />{c.name}
                     </span>
                   </td>
                   <td className={`py-2 text-center font-semibold tabular-nums ${c.baseline.fiscalBalancePct >= 0 ? "text-green-700" : c.baseline.fiscalBalancePct > -8 ? "text-amber-700" : "text-red-700"}`}>
