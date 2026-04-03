@@ -155,7 +155,7 @@ export default function Tab1_Overview() {
       {/* KPI cards */}
       <div>
         <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-3">
-          Pre-war fiscal balance — % of GDP · $65/bbl baseline
+          FY 2026 fiscal balance — % of GDP · MOF budget assumptions
         </p>
         <div className="grid grid-cols-6 gap-2">
           {COUNTRIES.map((c) => <KpiCard key={c.id} country={c} />)}
@@ -248,7 +248,7 @@ export default function Tab1_Overview() {
       <div className="grid grid-cols-2 gap-5">
         <div className="border border-gray-200 rounded-xl p-5">
           <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">
-            Breakeven hydrocarbon price ($/bbl)
+            FY 2026 breakeven hydrocarbon price ($/bbl)
           </p>
           <div className="grid grid-cols-3 gap-2">
             {COUNTRIES.map((c) => <BreakevenCard key={c.id} country={c} />)}

@@ -4,10 +4,14 @@ import Tab2_Scenarios from "./Tab2_Scenarios";
 import Tab3_Countries from "./Tab3_Countries";
 import data from "../data/gcc-model.json";
 
+const WAR_START_GCC = new Date(2026, 1, 28);
+const conflictDayLive = Math.max(1, Math.floor((new Date() - WAR_START_GCC) / (1000 * 60 * 60 * 24)) + 1);
+const weeksNowGCC = Math.max(1, Math.round((new Date() - WAR_START_GCC) / (7 * 24 * 3600 * 1000)));
+
 const TABS = [
-  { id: "overview",  label: "Fiscal overview",   component: Tab1_Overview },
-  { id: "scenarios", label: "War scenarios",      component: Tab2_Scenarios },
-  { id: "countries", label: "Country deep dives", component: Tab3_Countries },
+  { id: "overview",  label: "Fiscal overview — FY 2026", component: Tab1_Overview },
+  { id: "scenarios", label: "War scenarios",              component: Tab2_Scenarios },
+  { id: "countries", label: "Country deep dives",         component: Tab3_Countries },
 ];
 
 export default function Dashboard() {
@@ -23,13 +27,13 @@ export default function Dashboard() {
                 GCC Fiscal War Impact Dashboard
               </h1>
               <p className="text-sm text-gray-500 mt-1">
-                Hormuz closure impact on GCC sovereign finances · War started 28 Feb 2026 · Updated {data.meta.lastUpdated}
+                Hormuz closure impact on GCC sovereign finances · FY 2026 · War started 28 Feb 2026 · Updated {data.meta.lastUpdated}
               </p>
             </div>
             <div className="text-right">
               <div className="flex items-center gap-2 justify-end mb-1">
                 <span className="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span className="text-xs font-medium text-red-600">Hormuz effectively closed — Day {data.liveStatus.conflictDay}</span>
+                <span className="text-xs font-medium text-red-600">Hormuz effectively closed — Day {conflictDayLive} · Week {weeksNowGCC}</span>
               </div>
               <p className="text-xs text-gray-400">
                 Brent <span className="font-semibold text-gray-700">${data.meta.oilCurrentPrice}</span>

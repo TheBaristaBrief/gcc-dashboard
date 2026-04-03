@@ -1,10 +1,10 @@
 {
   "meta": {
     "modelVersion": "v2",
-    "lastUpdated": "2026-03-29",
+    "lastUpdated": "2026-04-03",
     "warStartDate": "2026-02-28",
-    "today": "2026-03-25",
-    "weeksElapsed": 3,
+    "today": "2026-04-03",
+    "weeksElapsed": 5,
     "oilCurrentPrice": 108.78,
     "oilBaselinePrice": 65,
     "oilWarPrice": 125,
@@ -762,10 +762,10 @@
       "id": "A",
       "label": "Optimistic",
       "sublabel": "Trump deal · reopens ~1 week",
-      "daysFromToday": 14,
-      "totalWeeks": 5,
-      "warMonths": 1.15,
-      "reopens": "~2 Apr 2026",
+      "daysFromToday": 7,
+      "totalWeeks": 6,
+      "warMonths": 1.38,
+      "reopens": "~10 Apr 2026",
       "oilAnnualAvg": 75.1,
       "rationale": "CRS report (Mar 11 2026): 'days to weeks' optimistic case. Trump administration preferred outcome before US Navy Hormuz operation required. BofA April normalisation scenario (~$70/bbl annual avg).",
       "color": "green"
@@ -774,10 +774,10 @@
       "id": "B",
       "label": "Base",
       "sublabel": "Negotiations drag · ~1 month",
-      "daysFromToday": 30,
-      "totalWeeks": 7,
-      "warMonths": 1.62,
-      "reopens": "~19 Apr 2026",
+      "daysFromToday": 28,
+      "totalWeeks": 9,
+      "warMonths": 2.07,
+      "reopens": "~1 May 2026",
       "oilAnnualAvg": 77.2,
       "rationale": "BofA base case: conflict extends into Q2, Brent ~$85. Columbia CGEP (Mar 19 2026): '1-2 months' cited as trigger for US Navy Hormuz operation. Most likely per current analyst consensus.",
       "color": "amber",
@@ -787,18 +787,18 @@
       "id": "C",
       "label": "Pessimistic",
       "sublabel": "Deal collapses · ~2 months",
-      "daysFromToday": 60,
-      "totalWeeks": 11,
-      "warMonths": 2.54,
-      "reopens": "~19 May 2026",
+      "daysFromToday": 56,
+      "totalWeeks": 13,
+      "warMonths": 2.99,
+      "reopens": "~29 May 2026",
       "oilAnnualAvg": 81.5,
       "rationale": "Late May = inventory exhaustion boundary (60-90 day reserves now). EIA STEO: Brent >$95 for 2 more months then falling below $80 in Q3. Analysis (Mar 18 2026): closure >3 months = 'structural collapse' threshold.",
       "color": "red"
     }
   },
   "liveStatus": {
-    "conflictDay": 30,
-    "weeksElapsed": 4,
+    "conflictDay": 35,
+    "weeksElapsed": 5,
     "oilPrice": 109.4,
     "oilChange24h": 0.62,
     "brentPeak": 126,
@@ -812,8 +812,16 @@
     "globalSupplyLostMbd": 7.4,
     "keyEvents": [
       {
-        "date": "29 Mar",
-        "event": "Day 30 — Hormuz closure enters 5th week, no diplomatic breakthrough reported"
+        "date": "28 Feb",
+        "event": "US + Israel launch Operation Epic Fury"
+      },
+      {
+        "date": "4 Mar",
+        "event": "Iran declares Hormuz closed, attacks on tankers begin"
+      },
+      {
+        "date": "9 Mar",
+        "event": "Brent hits $104/bbl — above $100 for first time since 2022"
       },
       {
         "date": "11 Mar",
@@ -844,16 +852,12 @@
         "event": "QatarEnergy declares force majeure on long-term LNG contracts with China, South Korea, Italy, Belgium"
       },
       {
-        "date": "28 Feb",
-        "event": "US + Israel launch Operation Epic Fury"
+        "date": "29 Mar",
+        "event": "Day 30 — Hormuz closure enters 5th week, no diplomatic breakthrough reported"
       },
       {
-        "date": "4 Mar",
-        "event": "Iran declares Hormuz closed, attacks on tankers begin"
-      },
-      {
-        "date": "9 Mar",
-        "event": "Brent hits $104/bbl — above $100 for first time since 2022"
+        "date": "3 Apr",
+        "event": "Day 35 — Hormuz closure enters 6th week; US-Iran back-channel talks reported via Oman, no breakthrough"
       }
     ],
     "qatarLNGCapacityLostPct": 17,
