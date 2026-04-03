@@ -4,6 +4,7 @@ import data from "../data/gcc-model.json";
 const COUNTRIES = data.countries;
 const SCENARIOS = data.scenarios;
 const LIVE      = data.liveStatus;
+const FLAGS     = { kwt:"🇰🇼", qat:"🇶🇦", bhr:"🇧🇭", sau:"🇸🇦", uae:"🇦🇪", omn:"🇴🇲" };
 const GDP_USD   = { kwt:146, qat:249, bhr:47, sau:1322, uae:564, omn:108 };
 
 // Dynamic war timing — auto-updates daily
@@ -552,8 +553,25 @@ function CountryDetail({ country }) {
   const isQatar = country.id === "qat";
   const isUAE   = country.id === "uae";
 
+  const borderColor = isPos ? "border-l-green-400" : bal > -8 ? "border-l-amber-400" : "border-l-red-500";
+
   return (
     <div className="space-y-5">
+
+      {/* Country header */}
+      <div className={`flex items-center gap-3 pb-4 border-b border-gray-100 border-l-4 pl-4 ${borderColor}`}>
+        <span className="text-4xl leading-none">{FLAGS[country.id]}</span>
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">{country.name}</h2>
+          <p className="text-xs text-gray-400 mt-0.5">
+            FY 2026 baseline: <span className={`font-semibold ${isPos ? "text-green-700" : bal > -8 ? "text-amber-700" : "text-red-700"}`}>
+              {isPos ? "+" : ""}{bal.toFixed(1)}% of GDP
+            </span>
+            {" "}· Hormuz exposure: <span className="font-semibold text-gray-600">{country.hormuz.exposurePct}%</span>
+            {" "}· Breakeven: <span className="font-semibold text-gray-600">${country.baseline.breakevenOil}/bbl</span>
+          </p>
+        </div>
+      </div>
 
       {/* Latest news strip */}
       {country.latestNews?.length > 0 && (
@@ -755,7 +773,7 @@ export default function Tab3_Countries() {
               className={`flex items-center gap-2 px-4 py-2.5 text-sm border-b-2 transition-all -mb-px ${
                 isActive ? "border-gray-800 text-gray-900 font-medium" : "border-transparent text-gray-500 hover:text-gray-700"
               }`}>
-              <span className={`w-2 h-2 rounded-full flex-shrink-0 ${dotColor}`} />
+              <span className="text-lg leading-none">{FLAGS[c.id]}</span>
               {c.name}
             </button>
           );
