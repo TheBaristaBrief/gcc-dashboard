@@ -5,6 +5,10 @@ const COUNTRIES = data.countries;
 const SCENARIOS = data.scenarios;
 const LIVE      = data.liveStatus;
 const GDP_USD   = { kwt:146, qat:249, bhr:47, sau:1322, uae:564, omn:108 };
+
+// Dynamic war timing — auto-updates daily
+const WAR_START_GCC = new Date(2026, 1, 28);
+const WEEKS_NOW_GCC = Math.max(1, Math.round((new Date() - WAR_START_GCC) / (7 * 24 * 3600 * 1000)));
 const EXP_USD   = { kwt:85.1, qat:60.5, bhr:12.0, sau:350.6, uae:132.4, omn:31.1 };
 const DEBT_CEIL = { kwt:3.0, qat:2.0, bhr:8.0, sau:2.5, uae:0, omn:0 };
 
@@ -293,7 +297,7 @@ function CountryBuildYourOwn({ country }) {
   const DEF_MIL  = { kwt:2, qat:1, bhr:1, sau:4, uae:2, omn:0.5 }[country.id] || 2;
   const DEF_SUB  = { kwt:1, qat:1, bhr:1.5, sau:2, uae:1, omn:0.5 }[country.id] || 1;
   const DEF_NOL  = { kwt:2, qat:5, bhr:6, sau:2, uae:4, omn:1 }[country.id] || 2;
-  const DEF_WEEKS = LIVE.weeksElapsed;                          // e.g. 4 weeks into war
+  const DEF_WEEKS = WEEKS_NOW_GCC;                              // dynamic: weeks since 28 Feb 2026
   const DEF_OIL  = Math.round(LIVE.oilPrice / 5) * 5;          // current Brent rounded to $5
   const DEF_POST = 70;                                          // BofA mid-cycle
   const DEF_HORMUZ = 100;                                       // effectively closed
