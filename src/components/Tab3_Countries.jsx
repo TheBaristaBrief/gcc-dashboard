@@ -306,20 +306,24 @@ function CountryBuildYourOwn({ country }) {
   const DEF_POST = 70;                                          // BofA mid-cycle
   const DEF_HORMUZ = 100;                                       // effectively closed
 
-  const [warWeeks, setWarWeeks] = useState(DEF_WEEKS);
-  const [milPct,   setMilPct]   = useState(DEF_MIL);
-  const [subPct,   setSubPct]   = useState(DEF_SUB);
-  const [nolPct,   setNolPct]   = useState(DEF_NOL);
-  const [oilWar,   setOilWar]   = useState(DEF_OIL);
-  const [oilPost,  setOilPost]  = useState(DEF_POST);
-  const [hormuzCl, setHormuzCl] = useState(DEF_HORMUZ);
-  const [debtSplit, setDebtSplit] = useState(50);
+  const [warWeeks,    setWarWeeks]    = useState(DEF_WEEKS);
+  const [milPct,      setMilPct]      = useState(DEF_MIL);
+  const [subPct,      setSubPct]      = useState(DEF_SUB);
+  const [nolPct,      setNolPct]      = useState(DEF_NOL);
+  const [oilWar,      setOilWar]      = useState(DEF_OIL);
+  const [oilPost,     setOilPost]     = useState(DEF_POST);
+  const [hormuzCl,    setHormuzCl]    = useState(DEF_HORMUZ);
+  const [hormuzPost,  setHormuzPost]  = useState(0);      // % still restricted post-war
+  const [hormuzToll,  setHormuzToll]  = useState(0);      // Iran transit toll USD mn/vessel
+  const [debtSplit,   setDebtSplit]   = useState(50);
 
   const resetToToday = () => {
     setWarWeeks(DEF_WEEKS);
     setOilWar(DEF_OIL);
     setOilPost(DEF_POST);
     setHormuzCl(DEF_HORMUZ);
+    setHormuzPost(0);
+    setHormuzToll(0);
     setMilPct(DEF_MIL);
     setSubPct(DEF_SUB);
     setNolPct(DEF_NOL);
@@ -345,37 +349,52 @@ function CountryBuildYourOwn({ country }) {
     const oth_sh   = [0.52,0.57,0.67,0.67,0.72,0.52][i];
     const mfg_shk  = [-0.80,-0.90,-0.60,-0.60,-0.40,0.0][i];
     const oth_shk  = [-0.10,-0.10,-0.15,-0.05,-0.15,0.0][i];
-    const cl = hormuzCl/100;
+    const cl      = hormuzCl / 100;
+    const clPost  = hormuzPost / 100;
+    const postWarMos = Math.max(0, 10 - warMos);
 
     const byp_f = Math.min(1, Math.max(0,(bypass_v+0.1*fullprod)/fullprod));
     let oil_chg;
     if (i >= 3) {
-      oil_chg = (2*(1+0.07)+warMos*(1+byp_f-1+((oilWar-65)/65)*byp_f*cl)+Math.max(0,10-warMos)*(1+0.08)*oilPost/65)/12-1;
+      oil_chg = (2*(1+0.07)+warMos*(1+byp_f-1+((oilWar-65)/65)*byp_f*cl)+postWarMos*(1+0.08)*oilPost/65)/12-1;
     } else {
-      // war period: (1-cl) = export volume fraction × oilWar price; post-war: oilPost price
-      oil_chg = (2*(1+0.05)+warMos*(1-cl)*(oilWar/65)+Math.max(0,10-warMos)*(oilPost/65))/12-1;
+      oil_chg = (2*(1+0.05)+warMos*(1-cl)*(oilWar/65)+postWarMos*(1-clPost)*(oilPost/65))/12-1;
     }
     const nol_chg   = -(nolPct/100)*warMos/12;
-    const spend_chg = (milPct+subPct)/100*warMos/12; // exp_25 is already the 2026 MOF budget — no growth factor needed
-    const rev26 = oil_25*(1+oil_chg) + nol_25*(1+nol_chg);
+    const spend_chg = (milPct+subPct)/100*warMos/12;
+
+    // Post-war Hormuz toll (Iran permanent transit fee)
+    // Approx vessel counts per country (oil VLCCs + LNG cargoes where applicable)
+    const VESSELS = [307, 1191, 21, 1200, 400, 96][i]; // kwt,qat,bhr,sau,uae,omn
+    const fx = country.fxToUsd;
+    const tollImpactUSDbn = hormuzToll * VESSELS * (1 - clPost) * (postWarMos / 12) / 1000;
+    const tollImpactLCU   = tollImpactUSDbn / fx;
+
+    const rev26 = oil_25*(1+oil_chg) + nol_25*(1+nol_chg) - tollImpactLCU;
     const exp26 = exp_25*(1+spend_chg);
     const gdp_chg = oil_sh*oil_chg + mfg_sh*(mfg_shk*warMos/12) + oth_sh*(oth_shk*warMos/12);
     const gdp26 = gdp_25*(1+gdp_chg);
     const bal = (rev26-exp26)/gdp26*100;
-    const fx = country.fxToUsd;
     const existDebt = ([22,30,134,24,30,38][i]) / 100 * gdpUsd;
     const newDebtEst = Math.max(0, -(rev26-exp26) * fx);
     const totalDebt = existDebt + newDebtEst;
     const debtToGdp = totalDebt / (gdpUsd * (1 + (gdp26/gdp_25-1))) * 100;
+
+    // Incremental war cost vs pre-war MOF budget
+    const preWarDeficit    = oil_25 + nol_25 - exp_25;
+    const deficit          = rev26 - exp26;
+    const incrementalLCU   = Math.max(0, -(deficit - preWarDeficit));
+    const dailyIncrementalUSD = incrementalLCU * fx / 365;
+
     return {
       bal, delta:bal-base_pct, gdpGrowth:(gdp26/gdp_25-1)*100,
-      rev: rev26,         // LCU bn
-      exp: exp26,         // LCU bn
-      deficit: rev26-exp26, // LCU bn (negative = deficit)
+      rev: rev26, exp: exp26,
+      deficit,
       newDebt: newDebtEst, totalDebt, debtToGdp,
-      gdp: gdp26 * fx
+      gdp: gdp26 * fx,
+      tollImpactUSDbn, dailyIncrementalUSD
     };
-  }, [warWeeks, milPct, subPct, nolPct, oilWar, oilPost, hormuzCl, warMos]);
+  }, [warWeeks, milPct, subPct, nolPct, oilWar, oilPost, hormuzCl, hormuzPost, hormuzToll, warMos]);
 
   const Slider = ({ label, value, min, max, step, onChange, display, hint }) => (
     <div className="mb-3">
@@ -405,6 +424,7 @@ function CountryBuildYourOwn({ country }) {
       </div>
       <div className="grid grid-cols-2 gap-6">
         <div>
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">During war</p>
           <Slider label="War duration" value={warWeeks} min={1} max={52} step={1}
             onChange={setWarWeeks} display={`${warWeeks} weeks`}
             hint="Sc A=6wk · Sc B=9wk · Sc C=13wk · Gulf War I=43wk" />
@@ -413,8 +433,22 @@ function CountryBuildYourOwn({ country }) {
             hint={country.hormuz.exposurePct===0?"Country has bypass — low Hormuz exposure":"100%=full closure · 50%=partial"} />
           <Slider label="Oil/gas price during war" value={oilWar} min={70} max={160} step={5}
             onChange={setOilWar} display={`$${oilWar}/bbl`} hint={`Annual avg: $${oilAvg.toFixed(1)}`} />
+
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2 mt-3">Post war</p>
           <Slider label="Oil/gas price post-war" value={oilPost} min={55} max={90} step={1}
             onChange={setOilPost} display={`$${oilPost}/bbl`} hint="BofA mid-cycle $70" />
+          <Slider label="% Hormuz still restricted post-war" value={hormuzPost} min={0} max={50} step={5}
+            onChange={setHormuzPost} display={hormuzPost===0?"0% — fully reopened":`${hormuzPost}% restricted`}
+            hint="0%=fully open · 20%=partial restrictions remain (mines, insurance)" />
+          <Slider label="Iran transit toll (USD mn / vessel)" value={hormuzToll} min={0} max={5} step={0.1}
+            onChange={setHormuzToll}
+            display={hormuzToll===0?"No toll":`$${hormuzToll.toFixed(1)}m / vessel`}
+            hint={hormuzToll===0
+              ? "Model Iran imposing a permanent transit fee post-war"
+              : `$${(hormuzToll/2).toFixed(2)}/bbl oil reduction · FY2026 impact: −$${result.tollImpactUSDbn.toFixed(2)}bn USD`
+            } />
+
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2 mt-3">Spending pressures</p>
           <Slider label="Military spending (%/mo)" value={milPct} min={0} max={8} step={0.5}
             onChange={setMilPct} display={`+${milPct}%/mo`} hint="Model default shown" />
           <Slider label="Subsidies & support (%/mo)" value={subPct} min={0} max={4} step={0.5}
@@ -462,6 +496,16 @@ function CountryBuildYourOwn({ country }) {
                   </span>
                 </p>
               </div>
+              {/* Incremental war cost */}
+              {result.dailyIncrementalUSD > 0 && (
+                <div className="col-span-2 rounded-lg p-2 bg-rose-50 border border-rose-100">
+                  <p className="text-gray-400 mb-0.5">Incremental war cost vs budget</p>
+                  <p className="font-semibold text-sm text-rose-700">
+                    ${(result.dailyIncrementalUSD * 1000).toFixed(0)}m / day
+                    <span className="font-normal text-gray-400 ml-2">· ${(result.dailyIncrementalUSD * 7000).toFixed(0)}m / wk</span>
+                  </p>
+                </div>
+              )}
               <div className="bg-white rounded-lg p-2">
                 <p className="text-gray-400 mb-0.5">Total debt</p>
                 <p className={`font-semibold text-sm ${result.totalDebt>100?"text-red-600":"text-gray-800"}`}>${result.totalDebt.toFixed(1)}bn</p>

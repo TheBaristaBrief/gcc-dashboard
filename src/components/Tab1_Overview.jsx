@@ -370,6 +370,121 @@ export default function Tab1_Overview() {
         </div>
       </div>
 
+      {/* ── Aggregate GCC fiscal impact ─────────────────────────────── */}
+      {(() => {
+        const GDP_USD = { kwt:146, qat:193, bhr:45, sau:1274, uae:564, omn:105 };
+        const SCEN_LABELS = { A: "Sc A — Optimistic", B: "Sc B — Base", C: "Sc C — Severe" };
+        const SCEN_COLORS = { A: "text-green-700", B: "text-amber-700", C: "text-red-700" };
+        const SCEN_BG     = { A: "bg-green-50 border-green-200", B: "bg-amber-50 border-amber-200", C: "bg-red-50 border-red-200" };
+
+        const aggregate = (scenKey) => {
+          let totalRevUSD = 0, totalExpUSD = 0, totalGdpUSD = 0;
+          COUNTRIES.forEach(c => {
+            const s = c.scenarios[scenKey];
+            const gdp = GDP_USD[c.id];
+            const bal = s.fiscalBalancePct / 100;
+            const exp = c.fiscal2025?.expenditureLcu
+              ? c.fiscal2025.expenditureLcu * c.fxToUsd
+              : gdp * 0.35;
+            const rev = exp + bal * gdp;
+            totalRevUSD += rev;
+            totalExpUSD += exp;
+            totalGdpUSD += gdp;
+          });
+          const deficitUSD = totalRevUSD - totalExpUSD;
+          const balPct = deficitUSD / totalGdpUSD * 100;
+          return { deficitUSD, balPct, totalGdpUSD };
+        };
+
+        const preWar = (() => {
+          let totalRevUSD = 0, totalExpUSD = 0, totalGdpUSD = 0;
+          COUNTRIES.forEach(c => {
+            const gdp = GDP_USD[c.id];
+            const bal = c.baseline.fiscalBalancePct / 100;
+            const exp = c.fiscal2025?.expenditureLcu
+              ? c.fiscal2025.expenditureLcu * c.fxToUsd
+              : gdp * 0.35;
+            const rev = exp + bal * gdp;
+            totalRevUSD += rev;
+            totalExpUSD += exp;
+            totalGdpUSD += gdp;
+          });
+          return { deficitUSD: totalRevUSD - totalExpUSD, balPct: (totalRevUSD - totalExpUSD) / totalGdpUSD * 100, totalGdpUSD };
+        })();
+
+        const totalSWF = COUNTRIES.reduce((s, c) => s + c.swf.totalBn, 0);
+        const totalLiquidSWF = COUNTRIES.reduce((s, c) => s + c.swf.usableBn, 0);
+
+        return (
+          <div className="border border-gray-200 rounded-xl p-5">
+            <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-1">
+              Aggregate GCC fiscal impact — FY2026
+            </p>
+            <p className="text-xs text-gray-400 mb-4">Combined across all 6 GCC states · GDP-weighted fiscal balance</p>
+
+            {/* Pre-war baseline */}
+            <div className="grid grid-cols-4 gap-3 mb-4">
+              <div className="bg-gray-50 rounded-lg p-3">
+                <p className="text-xs text-gray-400 mb-0.5">Pre-war (MOF budgets)</p>
+                <p className={`text-2xl font-bold tabular-nums ${preWar.balPct>=0?"text-green-700":preWar.balPct>-5?"text-amber-700":"text-red-700"}`}>
+                  {preWar.balPct>=0?"+":""}{preWar.balPct.toFixed(1)}%
+                </p>
+                <p className="text-xs text-gray-400">of GCC GDP</p>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-3">
+                <p className="text-xs text-gray-400 mb-0.5">Combined GCC GDP</p>
+                <p className="text-2xl font-bold text-gray-800">${(preWar.totalGdpUSD/1000).toFixed(2)}T</p>
+                <p className="text-xs text-gray-400">USD 2026 estimate</p>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-3">
+                <p className="text-xs text-gray-400 mb-0.5">Total SWF buffer</p>
+                <p className="text-2xl font-bold text-gray-800">${(totalSWF/1000).toFixed(2)}T</p>
+                <p className="text-xs text-amber-600 text-xs mt-0.5">${totalLiquidSWF.toFixed(0)}bn liquid (~10% rule)</p>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-3">
+                <p className="text-xs text-gray-400 mb-0.5">Pre-war deficit (nominal)</p>
+                <p className={`text-2xl font-bold tabular-nums ${preWar.deficitUSD>=0?"text-green-700":"text-red-700"}`}>
+                  {preWar.deficitUSD>=0?"+":" –"}${Math.abs(preWar.deficitUSD).toFixed(0)}bn
+                </p>
+                <p className="text-xs text-gray-400">USD combined</p>
+              </div>
+            </div>
+
+            {/* War scenario comparison */}
+            <div className="grid grid-cols-3 gap-3">
+              {["A","B","C"].map(key => {
+                const agg = aggregate(key);
+                const delta = agg.balPct - preWar.balPct;
+                return (
+                  <div key={key} className={`rounded-lg border p-3 ${SCEN_BG[key]}`}>
+                    <p className="text-xs font-semibold text-gray-600 mb-2">{SCEN_LABELS[key]}</p>
+                    <p className={`text-2xl font-bold tabular-nums ${SCEN_COLORS[key]}`}>
+                      {agg.balPct>=0?"+":""}{agg.balPct.toFixed(1)}%
+                    </p>
+                    <p className="text-xs text-gray-500">of GCC GDP</p>
+                    <div className="mt-2 pt-2 border-t border-gray-200 space-y-1">
+                      <div className="flex justify-between text-xs">
+                        <span className="text-gray-400">vs pre-war</span>
+                        <span className={`font-semibold ${delta>=0?"text-green-600":"text-red-600"}`}>
+                          {delta>=0?"+":""}{delta.toFixed(1)}pp
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span className="text-gray-400">GCC deficit</span>
+                        <span className="font-semibold text-gray-700">
+                          {agg.deficitUSD>=0?"surplus ":"–"}${Math.abs(agg.deficitUSD).toFixed(0)}bn
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="text-xs text-gray-400 mt-3">Aggregate uses predefined scenario fiscal balance % per country · UAE consolidated · SWF liquid = 10% of total per Dr. Chan convention · Sources: MOF budgets 2026, IMF WEO</p>
+          </div>
+        );
+      })()}
+
       {/* Sources */}
       <div className="border border-gray-100 rounded-xl p-4">
         <button
