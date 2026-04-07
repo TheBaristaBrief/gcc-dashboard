@@ -216,13 +216,17 @@ export default function Tab1_Overview() {
                   </span>
                   {isGas && <span className="text-xs bg-amber-100 text-amber-700 px-1 py-0.5 rounded">LNG/Gas</span>}
                 </div>
-                <div className="relative flex h-4 rounded-sm overflow-hidden">
-                  <div className="bg-amber-500 flex items-center justify-end" style={{ width: `${oil}%` }}>
-                    <span className="text-white text-xs font-bold pr-1 leading-none" style={{ fontSize: "10px" }}>
-                      {oil.toFixed(0)}%
+                <div className="relative h-4">
+                  <div className="flex h-full rounded-sm overflow-hidden">
+                    <div className="bg-amber-500" style={{ width: `${oil}%` }} />
+                    <div className="bg-blue-400 flex-1" />
+                  </div>
+                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 pointer-events-none"
+                    style={{ left: `${oil}%` }}>
+                    <span className="bg-white text-gray-700 font-bold px-1 rounded shadow-sm border border-gray-200 whitespace-nowrap leading-none" style={{ fontSize: "10px" }}>
+                      {oil.toFixed(0)}% hydrocarbon
                     </span>
                   </div>
-                  <div className="bg-blue-400 flex-1" />
                 </div>
               </div>
               {/* Hormuz bar */}
