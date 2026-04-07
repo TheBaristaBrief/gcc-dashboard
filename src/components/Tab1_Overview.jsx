@@ -176,7 +176,7 @@ export default function Tab1_Overview() {
           {COUNTRIES.map((c) => <KpiCard key={c.id} country={c} />)}
         </div>
         <p className="text-xs text-gray-400 mt-2">
-          UAE shown consolidated · Abu Dhabi &amp; Dubai breakdown in card above · war-time divergence detailed in Country deep dives
+          FY 2026 plan figures derived from official MOF budgets — not historical actuals · UAE shown consolidated · Abu Dhabi &amp; Dubai breakdown in card above · war-time divergence detailed in Country deep dives
         </p>
       </div>
 
@@ -193,8 +193,9 @@ export default function Tab1_Overview() {
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-widest text-gray-400">
-              Hormuz dependency — exports at risk
+              Hormuz dependency — hydrocarbon exports at risk
             </p>
+            <p className="text-xs text-gray-400">Hydrocarbon exports only · Storage capacity limited to ~30–90 days · production curtailment likely beyond that</p>
           </div>
         </div>
 
@@ -215,7 +216,7 @@ export default function Tab1_Overview() {
                   </span>
                   <div className="flex items-center gap-1.5">
                     {isGas && <span className="text-xs bg-amber-100 text-amber-700 px-1 py-0.5 rounded">LNG/Gas</span>}
-                    <span className="text-xs text-gray-400">{oil.toFixed(0)}% hydro</span>
+                    <span className="text-xs text-gray-400">{oil.toFixed(0)}% hydrocarbons</span>
                   </div>
                 </div>
                 <div className="flex h-2.5 rounded-sm overflow-hidden">
@@ -329,9 +330,16 @@ export default function Tab1_Overview() {
 
       {/* SWF buffer cards */}
       <div className="border border-gray-200 rounded-xl p-5">
-        <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">
-          Sovereign wealth fund buffers
-        </p>
+        <div className="flex items-start justify-between mb-4">
+          <p className="text-xs font-medium uppercase tracking-widest text-gray-400">
+            Sovereign wealth fund buffers
+          </p>
+          <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5 ml-4 max-w-sm">
+            <p className="text-xs text-amber-800">
+              <span className="font-semibold">⚠ Liquidity caveat:</span> SWFs should not be treated as full fiscal cushions. Realistically only 2–10% is liquid and immediately deployable without redemption losses or opportunity cost. The remainder is in long-duration, illiquid, or strategically committed positions.
+            </p>
+          </div>
+        </div>
         <div className="grid grid-cols-6 gap-2 mb-3">
           {COUNTRIES.map((c) => <SWFCard key={c.id} country={c} />)}
         </div>

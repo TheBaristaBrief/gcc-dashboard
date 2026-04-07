@@ -561,11 +561,11 @@
         "bypassDescription": "1.8 m b/d Abu Dhabi Crude Oil Pipeline to Fujairah. UAE stays in surplus even if Fujairah fully destroyed (+1.6%)."
       },
       "swf": {
-        "totalBn": 1440,
+        "totalBn": 1700,
         "usableShare": 1,
-        "usableBn": 1440,
-        "accessNote": "ADIA + Mubadala. Some assets may not be immediately accessible (long-term mandates, illiquid positions).",
-        "note": "ADIA (~$1,080bn) + Mubadala ($330-358bn) = ~$1,440bn combined. ADIA crossed $1 trillion mark in 2025. Source: ADIA annual report 2025; Mubadala official AUM $330bn; Global SWF estimates."
+        "usableBn": 1700,
+        "accessNote": "ADIA + Mubadala + ADQ + EIA. Significant portion in long-term/illiquid mandates — not all immediately deployable.",
+        "note": "ADIA (~$1,080bn) + Mubadala ($330bn) + ADQ ($160bn) + EIA/other (~$130bn) = ~$1,700bn combined. ADIA crossed $1tn in 2025; ADQ is Abu Dhabi Developmental Holding; EIA is the federal Emirates Investment Authority. Note: liquid share varies — some assets are long-duration or illiquid. Sources: ADIA annual report 2025; Mubadala official AUM; ADQ reports; Global SWF 2025 rankings."
       },
       "borrowing": {
         "preWarSpreadBps": 50,
