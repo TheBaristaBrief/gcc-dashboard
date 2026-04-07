@@ -405,9 +405,9 @@ function CountryBuildYourOwn({ country }) {
       </div>
       <div className="grid grid-cols-2 gap-6">
         <div>
-          <Slider label="War duration" value={warWeeks} min={1} max={16} step={1}
+          <Slider label="War duration" value={warWeeks} min={1} max={52} step={1}
             onChange={setWarWeeks} display={`${warWeeks} weeks`}
-            hint="Sc A=5wk · Sc B=7wk · Sc C=11wk" />
+            hint="Sc A=6wk · Sc B=9wk · Sc C=13wk · Gulf War I=43wk" />
           <Slider label="% Hormuz closed" value={hormuzCl} min={0} max={100} step={5}
             onChange={setHormuzCl} display={`${hormuzCl}%`}
             hint={country.hormuz.exposurePct===0?"Country has bypass — low Hormuz exposure":"100%=full closure · 50%=partial"} />
